@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 10:27:45 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/03/24 15:01:59 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/23 14:45:30 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,6 @@ int		print_int(int n);
 int		print_hex(unsigned int n, char *base);
 int		print_ptr(void *n, char *base);
 char	*ft_utoa(unsigned int n);
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
-# endif 
-
-char	*get_next_line(int fd);
-char	*ft_gnl_strjoin(char *s1, char *s2);
-char	*ft_gnl_strchr(char *s, int c);
 
 void	solve_errors(char *str);
 
