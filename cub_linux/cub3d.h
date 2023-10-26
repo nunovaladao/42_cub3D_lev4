@@ -6,29 +6,36 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/24 00:14:12 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:43:50 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "minilibx-mlx/mlx.h"
+# include "minilibx_opengl/mlx.h"
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
 # include <math.h>
+# include <sys/time.h>
 
 # define mapWidth 24
 # define mapHeight 24
-# define screenWidth 640
-# define screenHeight 480
+extern int worldMap[mapWidth][mapHeight];
+
+# define texWidth 64
+# define texHeight 64
+# define screenWidth 800
+# define screenHeight 600
 
 # define ESC 53
 # define W 13
 # define A 0
 # define S 1
 # define D 2
+# define LEFT 123
+# define RIGHT 124
 
 typedef struct s_rgb
 {
@@ -37,7 +44,8 @@ typedef struct s_rgb
 	int		b;
 }	t_rgb;
 
-typedef struct	s_data {
+typedef struct	s_mlx
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -45,26 +53,69 @@ typedef struct	s_data {
 	int		endian;
     void	*mlx;
 	void	*mlx_win;
-	double x;
-	double y;
-	char *wall;
-	int		img_width;
-	int		img_height;
-	int **map; // Matriz para armazenar o mapa
-    int map_width;
-    int map_height;
-    int tile_size;
+	struct s_data *data;
+}				t_mlx;
+
+typedef struct	s_data
+{
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	int mapX;
+	int mapY;
+	double sideDistX;
+	double sideDistY;
+	double deltaDistX;
+	double deltaDistY;
+	double perpWallDist;
+	int stepX;
+	int stepY;
+	int hit;
+	int side;
+	int lineHeight;
+	int drawStart;
+	int drawEnd;
+	double moveSpeed;
+	double rotSpeed;
+	double oldDirX;
+	double oldPlaneX;
+	t_mlx *mlx;
+	struct s_map *map;
 }				t_data;
 
-void	mlx_exit(t_data *data);
-int	hook_events(t_data *data);
-void open_window(t_data *data);
-void init_mlx(t_data *data);
+
+typedef struct	s_map
+{
+	//int **worldMap; // Matriz para armazenar o mapa
+   /*  int mapWidth;
+	int mapHeight; */
+	double wallX;
+	t_data *data;
+}				t_map;
+
+// Mlx
+void	mlx_exit(t_mlx *m);
+int	hook_events(t_mlx *m);
+void open_window(t_mlx *m);
+int keyboard_hook(int keycode, t_mlx *m);
+
+// Init
+void init_all(t_mlx *m, t_data *data, t_map *map);
 
 // Parser
 int		check_file(char *file);
 int    check_args(int ac, char **av);
 int check_file_extension(char *file_name);
+
+// Draw
+void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color);
+void background(t_mlx *m);
 
 
 # endif

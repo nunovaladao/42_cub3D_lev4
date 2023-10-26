@@ -6,17 +6,17 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:58:07 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/21 17:57:51 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/24 11:38:57 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void open_window(t_data *data)
+void open_window(t_mlx *m)
 {
-    data->mlx = mlx_init();
-	data->mlx_win = mlx_new_window(data->mlx, screenWidth, screenHeight, "cub3D");
-	data->img = mlx_new_image(data->mlx, screenWidth, screenHeight);
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length,
-								&data->endian);
+    m->mlx = mlx_init();
+	m->mlx_win = mlx_new_window(m->mlx, screenWidth, screenHeight, "cub3D");
+	m->img = mlx_new_image(m->mlx, screenWidth, screenHeight);
+	m->addr = mlx_get_data_addr(m->img, &m->bits_per_pixel, &m->line_length,
+								&m->endian);
 }

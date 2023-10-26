@@ -6,7 +6,7 @@
 #    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 17:52:53 by nsoares-          #+#    #+#              #
-#    Updated: 2023/10/24 00:15:06 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/10/26 11:18:24 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ LIBFT = ./libft/libft.a
 
 # __________MLX_______________
 
-MLX = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11
+MLX = -L ./minilibx_opengl -lmlx -Imlx -framework OpenGL -framework AppKit
 
 # _________SOURCES____________
 
 SOURCE_FILES = gnl/get_next_line.c gnl/get_next_line_utils.c \
 				main.c src/hook.c src/cub_utils.c src/window.c src/inits/init.c \
-				src/parser/file_access.c src/parser/check_args.c
+				src/parser/file_access.c src/parser/check_args.c src/draw_map/draw.c \
 				
 				
 
@@ -56,7 +56,7 @@ all: compilation_start $(NAME)
 
 $(NAME): $(OBJS_FILES)
 		$(MAKE) --no-print-directory -C ./libft
-		$(MAKE) --no-print-directory -C ./minilibx-linux
+		$(MAKE) --no-print-directory -C ./minilibx_opengl
 		$(CC) $(CFLAGS) $(SOURCE_FILES) $(LIBFT) $(MLX) -o $(NAME)
 		@ $(CUB3D_READY)
 
@@ -71,7 +71,7 @@ clean:
 fclean: clean
 	@ $(RM) $(NAME)
 	@ cd libft && make fclean
-	@ cd ./minilibx-linux && make clean
+	@ cd ./minilibx_opengl && make clean
 	@ $(FCLEANED)
 		
 re:	fclean all
