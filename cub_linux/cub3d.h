@@ -6,19 +6,21 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/27 22:52:16 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:47:05 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "minilibx_opengl/mlx.h"
+# include "minilibx-linux/mlx.h"
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
 # include <math.h>
 # include <sys/time.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 # define mapWidth 24
 # define mapHeight 24
@@ -29,13 +31,6 @@
 # define screenWidth 800
 # define screenHeight 600
 
-# define ESC 53
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define LEFT 123
-# define RIGHT 124
 
 typedef struct s_rgb
 {

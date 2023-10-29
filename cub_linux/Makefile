@@ -6,7 +6,7 @@
 #    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 17:52:53 by nsoares-          #+#    #+#              #
-#    Updated: 2023/10/27 16:19:18 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/10/29 13:39:08 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT = ./libft/libft.a
 
 # __________MLX_______________
 
-MLX = -L ./minilibx_opengl -lmlx -Imlx -framework OpenGL -framework AppKit
+MLX = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11 -lm
 
 # _________SOURCES____________
 
@@ -56,7 +56,7 @@ all: compilation_start $(NAME)
 
 $(NAME): $(OBJS_FILES)
 		$(MAKE) --no-print-directory -C ./libft
-		$(MAKE) --no-print-directory -C ./minilibx_opengl
+		$(MAKE) --no-print-directory -C ./minilibx-linux
 		$(CC) $(CFLAGS) $(SOURCE_FILES) $(LIBFT) $(MLX) -o $(NAME)
 		@ $(CUB3D_READY)
 
@@ -71,7 +71,7 @@ clean:
 fclean: clean
 	@ $(RM) $(NAME)
 	@ cd libft && make fclean
-	@ cd ./minilibx_opengl && make clean
+	@ cd ./minilibx-linux && make clean
 	@ $(FCLEANED)
 		
 re:	fclean all

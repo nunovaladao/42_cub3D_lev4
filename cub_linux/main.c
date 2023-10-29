@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:48:39 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/28 13:55:28 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/29 14:14:44 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,6 +227,7 @@ int main(int ac, char **av)
 	
 	// init textures
 	
+	mlx_hook(mlx.mlx_win, 2, 1L << 0, &keyboard_hook, &mlx);
 	mlx_loop_hook(mlx.mlx, render_next_frame, &data);
     hook_events(&mlx);
 	mlx_loop(mlx.mlx);
