@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/26 22:43:50 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:52:16 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define mapWidth 24
 # define mapHeight 24
-extern int worldMap[mapWidth][mapHeight];
+
 
 # define texWidth 64
 # define texHeight 64
@@ -92,10 +92,14 @@ typedef struct	s_data
 
 typedef struct	s_map
 {
-	//int **worldMap; // Matriz para armazenar o mapa
+	char **worldMap; // Matriz para armazenar o mapa
    /*  int mapWidth;
 	int mapHeight; */
 	double wallX;
+	char *map_file;
+	int fd;
+	char *line;
+	int nr_rows;
 	t_data *data;
 }				t_map;
 
@@ -113,9 +117,19 @@ int		check_file(char *file);
 int    check_args(int ac, char **av);
 int check_file_extension(char *file_name);
 
+// Map
+void check_map(t_map *map);
+
 // Draw
 void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color);
 void background(t_mlx *m);
 
+// Moves
+void move_forward(t_mlx *m);
+void move_backward(t_mlx *m);
+void move_left(t_mlx *m);
+void move_right(t_mlx *m);
+void rotate_left(t_mlx *m);
+void rotate_right(t_mlx *m);
 
 # endif

@@ -6,11 +6,17 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:52:49 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/26 10:16:04 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/28 12:19:49 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+/* int	my_mlx_pixel_get(t_texture *t, int x, int y)
+{
+	return (*(unsigned int *)((t->addr + (y * t->line_length) + \
+		(x * t->bits_per_pixel / 8))));
+} */
 
 void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color)
 {

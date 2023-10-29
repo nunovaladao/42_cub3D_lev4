@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:45:29 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/25 19:45:46 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/27 14:15:23 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int render_next_frame(void *param)
 
     background(d->mlx);
     
-	//double posX = 22, posY = 12;  //x and y start position
+	/* double posX = 22, posY = 12;  //x and y start position
   	double dirX = -1, dirY = 0; //initial direction vector
-  	double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
+  	double planeX = 0, planeY = 0.66; */ //the 2d raycaster version of camera plane
 
 	//double time = 0; //time of current frame
   	//double oldTime = 0; //time of previous frame
@@ -28,103 +28,127 @@ int render_next_frame(void *param)
 	for (int x = 0; x < screenWidth; x++)
     {
       	//calculate ray position and direction
-    	double cameraX = 2 * x / (double)screenWidth - 1; //x-coordinate in camera space
-    	double rayDirX = dirX + planeX * cameraX;
-    	double rayDirY = dirY + planeY * cameraX;
+    	d->cameraX = 2 * x / (double)screenWidth - 1; //x-coordinate in camera space
+    	d->rayDirX = d->dirX + d->planeX * d->cameraX;
+    	d->rayDirY = d->dirY + d->planeY * d->cameraX;
 
 		//which box of the map we're in
-      	int mapX = (int)d->posX;
-      	int mapY = (int)d->posY;
+      	d->mapX = (int)d->posX;
+      	d->mapY = (int)d->posY;
 
       	//length of ray from current position to next x or y-side
-      	double sideDistX;
-      	double sideDistY;
+      	/* double sideDistX;
+      	double sideDistY; */
 
        	//length of ray from one x or y-side to next x or y-side
-		double deltaDistX = 0;
-		if (rayDirX == 0)
-			deltaDistX = 1e30;
-		else
-			deltaDistX = fabs(1.0 / rayDirX);
+		//double deltaDistX = 0;
 
-		double deltaDistY = 0;
-		if (rayDirY == 0)
-			deltaDistY = 1e30;
+		if (d->rayDirX == 0)
+			d->deltaDistX = 1e30;
 		else
-			deltaDistY = fabs(1.0 / rayDirY);
+			d->deltaDistX = fabs(1.0 / d->rayDirX);
 
-		double perpWallDist;
+		//double deltaDistY = 0;
+		if (d->rayDirY == 0)
+			d->deltaDistY = 1e30;
+		else
+			d->deltaDistY = fabs(1.0 / d->rayDirY);
+
+		//double perpWallDist;
 
 		//what direction to step in x or y-direction (either +1 or -1)
-		int stepX;
-		int stepY;
+		/* int stepX;
+		int stepY; */
 
-		int hit = 0; //was there a wall hit?
-		int side; //was a NS or a EW wall hit?
+		d->hit = 0; //was there a wall hit?
+		//int side; //was a NS or a EW wall hit?
 
 		//calculate step and initial sideDist
-		if (rayDirX < 0)
+		if (d->rayDirX < 0)
 		{
-			stepX = -1;
-			sideDistX = (d->posX - mapX) * deltaDistX;
+			d->stepX = -1;
+			d->sideDistX = (d->posX - d->mapX) * d->deltaDistX;
 		}
 		else
 		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - d->posX) * deltaDistX;
+			d->stepX = 1;
+			d->sideDistX = (d->mapX + 1.0 - d->posX) * d->deltaDistX;
 		}
-		if (rayDirY < 0)
+		if (d->rayDirY < 0)
 		{
-			stepY = -1;
-			sideDistY = (d->posY - mapY) * deltaDistY;
+			d->stepY = -1;
+			d->sideDistY = (d->posY - d->mapY) * d->deltaDistY;
 		}
 		else
 		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - d->posY) * deltaDistY;
+			d->stepY = 1;
+			d->sideDistY = (d->mapY + 1.0 - d->posY) * d->deltaDistY;
 		}
 
 		//perform DDA
-		while (hit == 0)
+		while (d->hit == 0)
 		{
 			//jump to next map square, either in x-direction, or in y-direction
-			if (sideDistX < sideDistY)
+			if (d->sideDistX < d->sideDistY)
 			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
+				d->sideDistX += d->deltaDistX;
+				d->mapX += d->stepX;
+				d->side = 0;
 			}
 			else
 			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
+				d->sideDistY += d->deltaDistY;
+				d->mapY += d->stepY;
+				d->side = 1;
 			}
 			//Check if ray has hit a wall
-			if (worldMap[mapX][mapY] > 0) 
-				hit = 1;
+			if (worldMap[d->mapX][d->mapY] > 0)
+				d->hit = 1;
 		}
 
-		if (side == 0)
-			perpWallDist = (sideDistX - deltaDistX);
+		if (d->side == 0)
+			d->perpWallDist = (d->sideDistX - d->deltaDistX);
       	else
-			perpWallDist = (sideDistY - deltaDistY);
+			d->perpWallDist = (d->sideDistY - d->deltaDistY);
 
 		// int pitch = 100;
 
 		//Calculate height of line to draw on screen
-		int lineHeight = (int)(screenHeight / perpWallDist);
+		d->lineHeight = (int)(screenHeight / d->perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + screenHeight / 2;
+		d->drawStart = -d->lineHeight / 2 + screenHeight / 2;
 
-		if (drawStart < 0)
-			drawStart = 0;
+		if (d->drawStart < 0)
+			d->drawStart = 0;
 
-		int drawEnd = lineHeight / 2 + screenHeight / 2;
+		d->drawEnd = d->lineHeight / 2 + screenHeight / 2;
 
-		if (drawEnd >= screenHeight)
-			drawEnd = screenHeight - 1;
+		if (d->drawEnd >= screenHeight)
+			d->drawEnd = screenHeight - 1;
+
+		//texturing calculations
+		//int texNum = worldMap[d->mapX][d->mapY] - 1; //1 subtracted from it so that texture 0 can be used!
+
+		//calculate value of wallX
+		//double wallX; //where exactly the wall was hit
+		if (d->side == 0)
+			d->map->wallX = d->posY + d->perpWallDist * d->rayDirY;
+		else
+			d->map->wallX = d->posX + d->perpWallDist * d->rayDirX;
+		d->map->wallX -= floor((d->map->wallX));
+
+		//x coordinate on the texture
+		int texX = (int)(d->map->wallX * (double)texWidth);
+		if (d->side == 0 && d->rayDirX > 0)
+			texX = texWidth - texX - 1;
+		if (d->side == 1 && d->rayDirY < 0)
+			texX = texWidth - texX - 1;
+
+		// How much to increase the texture coordinate per screen pixel
+		//double step = 1.0 * texHeight / d->lineHeight;
+		// Starting texture coordinate
+		//double texPos = (d->drawStart - screenHeight / 2 + d->lineHeight / 2) * step;
 
 		int wallColors[] = {
 			0xFF0000, // Vermelho (parede tipo 1)
@@ -135,17 +159,34 @@ int render_next_frame(void *param)
     	};
 
 		// draw the walls
-		int color = wallColors[worldMap[mapX][mapY] - 1]; // -1 para mapear para o índice do array
-		for (int y = drawStart; y < drawEnd; y++)
+		//int color = wallColors[worldMap[d->mapX][d->mapY] - 1]; // -1 para mapear para o índice do array
+
+		for (int y = d->drawStart; y < d->drawEnd; y++)
 		{
+			// Calcule a coordenada da textura (texY) a ser mapeada para a parede.
+			//int texY = (int)texPos; // Esta é uma simplificação, pode precisar de mais lógica dependendo da escala da textura.
+			//texPos += step;
+
+			// Color é a cor da textura na posição (texX, texY).
+			// Certifique-se de que texX, texY, e texNum estejam definidos corretamente.
+			int color = wallColors[worldMap[d->mapX][d->mapY] - 1]; // Função fictícia para obter a cor da textura.
+
+			// Se for uma parede na lateral (side == 1), escureça a cor.
+			if (d->side == 1)
+			{
+				color = (color >> 1) & 0x7F7F7F; // Isso divide os componentes RGB por 2.
+			}
+
 			my_mlx_pixel_put(d->mlx, x, y, color);
 		}
-		mlx_put_image_to_window(d->mlx->mlx, d->mlx->mlx_win, d->mlx->img, 0, 0);
-
-		// move player
-		
-
+		mlx_put_image_to_window(d->mlx->mlx, d->mlx->mlx_win, d->mlx->img, 0, 0);	
 	}
+
+	d->moveSpeed = 0.8; //the constant value is in squares/second
+    d->rotSpeed = 0.5; //the constant value is in radians/second
+	
+	// move player
+
 	
     return 0;
 }

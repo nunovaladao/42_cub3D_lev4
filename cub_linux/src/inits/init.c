@@ -6,19 +6,20 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/26 18:03:20 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/28 13:08:30 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void init_mlx(t_mlx *m)
+void init_mlx(t_mlx *m, t_data *data)
 {
     m->mlx = NULL;
     m->mlx_win = NULL;
+    m->data = data;
 }
 
-void init_data(t_data *data, t_mlx *m, t_map *map)
+void init_data(t_data *data, t_mlx *m, struct s_map *map)
 {
     data->posX = 22;
     data->posY = 12;
@@ -52,15 +53,18 @@ void init_data(t_data *data, t_mlx *m, t_map *map)
     data->map = map;
 }
 
-void init_map(t_map *map)
+void init_map(t_map *map, t_data *data)
 {
     map->wallX = 0.0;
-
+    map->fd = 0;
+    map->nr_rows = 0;
+    map->worldMap = NULL;
+    map->data = data;
 }
 
 void init_all(t_mlx *m, t_data *data, t_map *map)
 {
-    init_mlx(m);
+    init_mlx(m, data);
     init_data(data, m, map);
-    init_map(map);
+    init_map(map, data);
 }
