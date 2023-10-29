@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/28 13:08:30 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/29 17:20:03 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void init_data(t_data *data, t_mlx *m, struct s_map *map)
     
     data->mlx = m;
     data->map = map;
+    data->text = malloc(4 * sizeof(t_texture));
+    if (!data->text)
+        exit(EXIT_FAILURE);
 }
 
 void init_map(t_map *map, t_data *data)

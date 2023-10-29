@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/29 13:47:05 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/29 17:00:59 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 
-# define mapWidth 24
-# define mapHeight 24
-
+# define SOUTH 0
+# define NORTH 1
+# define EAST 2
+# define WEST 3
 
 # define texWidth 64
 # define texHeight 64
@@ -38,6 +39,17 @@ typedef struct s_rgb
 	int		g;
 	int		b;
 }	t_rgb;
+
+typedef struct s_texture
+{
+	int			t_w;
+	int			t_h;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}	t_texture;
 
 typedef struct	s_mlx
 {
@@ -82,12 +94,13 @@ typedef struct	s_data
 	double oldPlaneX;
 	t_mlx *mlx;
 	struct s_map *map;
+	t_texture *text;
 }				t_data;
 
 
 typedef struct	s_map
 {
-	char **worldMap; // Matriz para armazenar o mapa
+	char **worldMap; // armazenar o mapa
    /*  int mapWidth;
 	int mapHeight; */
 	double wallX;
