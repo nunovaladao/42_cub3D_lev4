@@ -6,11 +6,24 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:13:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/27 14:14:37 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:13:47 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+int convert_color(char color) 
+{
+    switch (color) 
+	{
+        case '1': return 0xFF0000; // Vermelho
+        case '2': return 0x00FF00; // Verde
+        case '3': return 0x0000FF; // Azul
+        case '4': return 0xFFFF00; // Amarelo
+        case '5': return 0xFF00FF; // Magenta
+        default: return 0xFFFFFF;  // Branco (ou cor padrão)
+    }
+}
 
 int render_next_frame(void *param)
 {

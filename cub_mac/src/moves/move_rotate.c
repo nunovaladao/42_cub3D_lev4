@@ -6,28 +6,28 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 13:31:19 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/27 13:31:40 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:50:58 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void rotate_left(t_mlx *m)
+void rotate_left(t_data *d)
 {
-    m->data->oldDirX = m->data->dirX;
-    m->data->dirX = m->data->dirX * cos(m->data->rotSpeed) - m->data->dirY * sin(m->data->rotSpeed);
-    m->data->dirY = m->data->oldDirX * sin(m->data->rotSpeed) + m->data->dirY * cos(m->data->rotSpeed);
-    m->data->oldPlaneX = m->data->planeX;
-    m->data->planeX = m->data->planeX * cos(m->data->rotSpeed) - m->data->planeY * sin(m->data->rotSpeed);
-    m->data->planeY = m->data->oldPlaneX * sin(m->data->rotSpeed) + m->data->planeY * cos(m->data->rotSpeed);
+    d->oldDirX = d->dirX;
+    d->dirX = d->dirX * cos(d->rotSpeed) - d->dirY * sin(d->rotSpeed);
+    d->dirY = d->oldDirX * sin(d->rotSpeed) + d->dirY * cos(d->rotSpeed);
+    d->oldPlaneX = d->planeX;
+    d->planeX = d->planeX * cos(d->rotSpeed) - d->planeY * sin(d->rotSpeed);
+    d->planeY = d->oldPlaneX * sin(d->rotSpeed) + d->planeY * cos(d->rotSpeed);
 }
 
-void rotate_right(t_mlx *m)
+void rotate_right(t_data *d)
 {
-    m->data->oldDirX = m->data->dirX;
-    m->data->dirX = m->data->dirX * cos(-m->data->rotSpeed) - m->data->dirY * sin(-m->data->rotSpeed);
-    m->data->dirY = m->data->oldDirX * sin(-m->data->rotSpeed) + m->data->dirY * cos(-m->data->rotSpeed);
-    m->data->oldPlaneX = m->data->planeX;
-    m->data->planeX = m->data->planeX * cos(-m->data->rotSpeed) - m->data->planeY * sin(-m->data->rotSpeed);
-    m->data->planeY = m->data->oldPlaneX * sin(-m->data->rotSpeed) + m->data->planeY * cos(-m->data->rotSpeed);
+    d->oldDirX = d->dirX;
+    d->dirX = d->dirX * cos(-d->rotSpeed) - d->dirY * sin(-d->rotSpeed);
+    d->dirY = d->oldDirX * sin(-d->rotSpeed) + d->dirY * cos(-d->rotSpeed);
+    d->oldPlaneX = d->planeX;
+    d->planeX = d->planeX * cos(-d->rotSpeed) - d->planeY * sin(-d->rotSpeed);
+    d->planeY = d->oldPlaneX * sin(-d->rotSpeed) + d->planeY * cos(-d->rotSpeed);
 }
