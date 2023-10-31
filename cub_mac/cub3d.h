@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/27 22:52:16 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/10/31 20:57:51 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 # include "gnl/get_next_line.h"
 
 # include <math.h>
-# include <sys/time.h>
 
-# define mapWidth 24
-# define mapHeight 24
+# define SOUTH 0
+# define NORTH 1
+# define EAST 2
+# define WEST 3
 
 
 # define texWidth 64
@@ -29,13 +30,13 @@
 # define screenWidth 800
 # define screenHeight 600
 
-# define ESC 53
+/* # define ESC 53
 # define W 13
 # define A 0
 # define S 1
 # define D 2
 # define LEFT 123
-# define RIGHT 124
+# define RIGHT 124 */
 
 typedef struct s_rgb
 {
@@ -43,6 +44,17 @@ typedef struct s_rgb
 	int		g;
 	int		b;
 }	t_rgb;
+
+typedef struct s_texture
+{
+	int			t_w;
+	int			t_h;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}	t_texture;
 
 typedef struct	s_mlx
 {
@@ -85,14 +97,23 @@ typedef struct	s_data
 	double rotSpeed;
 	double oldDirX;
 	double oldPlaneX;
+	int texX;
+	int flag_up;
+	int flag_down;
+	int flag_left;
+	int flag_right;
+	int flag_rot_left;
+	int flag_rot_right;
+
 	t_mlx *mlx;
 	struct s_map *map;
+	t_texture *text;
 }				t_data;
 
 
 typedef struct	s_map
 {
-	char **worldMap; // Matriz para armazenar o mapa
+	char **worldMap; // armazenar o mapa
    /*  int mapWidth;
 	int mapHeight; */
 	double wallX;
@@ -100,6 +121,14 @@ typedef struct	s_map
 	int fd;
 	char *line;
 	int nr_rows;
+	char *n_texture;
+	char *s_texture;
+	char *w_texture;
+	char *e_texture;
+	char *floor_texture;
+	char *ceiling_texture;
+	double step;
+	double texPos;
 	t_data *data;
 }				t_map;
 
@@ -108,9 +137,11 @@ void	mlx_exit(t_mlx *m);
 int	hook_events(t_mlx *m);
 void open_window(t_mlx *m);
 int keyboard_hook(int keycode, t_mlx *m);
+int keyboard_keyrelease(int keycode, t_mlx *m);
 
 // Init
 void init_all(t_mlx *m, t_data *data, t_map *map);
+void init_textures(t_data *d);
 
 // Parser
 int		check_file(char *file);
@@ -122,14 +153,17 @@ void check_map(t_map *map);
 
 // Draw
 void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color);
+int	my_mlx_pixel_get(t_texture *t, int x, int y);
 void background(t_mlx *m);
+int render_next_frame(void *param);
 
 // Moves
-void move_forward(t_mlx *m);
-void move_backward(t_mlx *m);
-void move_left(t_mlx *m);
-void move_right(t_mlx *m);
-void rotate_left(t_mlx *m);
-void rotate_right(t_mlx *m);
+void move_forward(t_data *d);
+void move_backward(t_data *d);
+void move_left(t_data *d);
+void move_right(t_data *d);
+void rotate_left(t_data *d);
+void rotate_right(t_data *d);
+void move_camera(t_data *d);
 
 # endif
