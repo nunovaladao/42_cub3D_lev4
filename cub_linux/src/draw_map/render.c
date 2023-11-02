@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:45:29 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/31 20:44:58 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:25:09 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int render_next_frame(void *param)
   	double planeX = 0, planeY = 0.66; */ //the 2d raycaster version of camera plane
 
 	int x = -1;
-	while (++x < screenWidth)
+	while (++x < SCREENWIDTH)
     {
       	//calculate ray position and direction
-    	d->cameraX = 2 * x / (double)screenWidth - 1; //x-coordinate in camera space
+    	d->cameraX = 2 * x / (double)SCREENWIDTH - 1; //x-coordinate in camera space
     	d->rayDirX = d->dirX + d->planeX * d->cameraX;
     	d->rayDirY = d->dirY + d->planeY * d->cameraX;
 
@@ -41,15 +41,15 @@ int render_next_frame(void *param)
        	//length of ray from one x or y-side to next x or y-side
 		//double deltaDistX = 0;
 
-		/* if (d->rayDirX == 0)
+		if (d->rayDirX == 0)
 			d->deltaDistX = 1e30;
-		else */
+		else
 			d->deltaDistX = fabs(1.0 / d->rayDirX);
 
 		//double deltaDistY = 0;
-		/* if (d->rayDirY == 0)
+		if (d->rayDirY == 0)
 			d->deltaDistY = 1e30;
-		else */
+		else
 			d->deltaDistY = fabs(1.0 / d->rayDirY);
 
 		//double perpWallDist;
@@ -112,18 +112,18 @@ int render_next_frame(void *param)
 		// int pitch = 100;
 
 		//Calculate height of line to draw on screen
-		d->lineHeight = (int)(screenHeight / d->perpWallDist);
+		d->lineHeight = (int)(SCREENHEIGHT / d->perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		d->drawStart = -d->lineHeight / 2 + screenHeight / 2;
+		d->drawStart = -d->lineHeight / 2 + SCREENHEIGHT / 2;
 
 		if (d->drawStart < 0)
 			d->drawStart = 0;
 
-		d->drawEnd = d->lineHeight / 2 + screenHeight / 2;
+		d->drawEnd = d->lineHeight / 2 + SCREENHEIGHT / 2;
 
-		if (d->drawEnd >= screenHeight)
-			d->drawEnd = screenHeight - 1;
+		if (d->drawEnd >= SCREENHEIGHT)
+			d->drawEnd = SCREENHEIGHT - 1;
 
 		//calculate value of wallX
 		//double wallX; //where exactly the wall was hit
@@ -134,22 +134,22 @@ int render_next_frame(void *param)
 		d->map->wallX -= floor((d->map->wallX));
 
 		//x coordinate on the texture
-		d->texX = (int)(d->map->wallX * (double)texWidth);
+		d->texX = (int)(d->map->wallX * (double)TEXWIDTH);
 		if (d->side == '0' && d->rayDirX > 0)
-			d->texX = texWidth - d->texX - 1;
+			d->texX = TEXWIDTH - d->texX - 1;
 		if (d->side == '1' && d->rayDirY < 0)
-			d->texX = texWidth - d->texX - 1;
+			d->texX = TEXWIDTH - d->texX - 1;
 
 		// How much to increase the texture coordinate per screen pixel
-		d->map->step = 1.0 * texHeight / d->lineHeight;
+		d->map->step = 1.0 * TEXTHEIGHT / d->lineHeight;
 		// Starting texture coordinate
-		d->map->texPos = (d->drawStart - screenHeight / 2 + d->lineHeight / 2) * d->map->step;
+		d->map->texPos = (d->drawStart - SCREENHEIGHT / 2 + d->lineHeight / 2) * d->map->step;
 
 
 		int y = d->drawStart;
 		while (y < d->drawEnd)
 		{
-			int texY = (int)d->map->texPos & (texHeight - 1);
+			int texY = (int)d->map->texPos & (TEXTHEIGHT - 1);
 			d->map->texPos += d->map->step;
 
 			if (d->side == '0' && d->rayDirX < 0)
@@ -162,13 +162,13 @@ int render_next_frame(void *param)
 				my_mlx_pixel_put(d->mlx, x, y, (unsigned int)my_mlx_pixel_get(&d->text[WEST], d->texX, texY));
 			y++;
 		}
-		mlx_put_image_to_window(d->mlx->mlx, d->mlx->mlx_win, d->mlx->img, 0, 0);
 	}
+	//mlx_put_image_to_window(d->mlx->mlx, d->mlx->mlx_win, d->mlx->img, 0, 0);
 
-	d->moveSpeed = 2; //the constant value is in squares/second
-    d->rotSpeed = 0.5; //the constant value is in radians/second
+	d->moveSpeed = 0.05; //the constant value is in squares/second
+    d->rotSpeed = 0.01; //the constant value is in radians/second
 
-	move_camera(d);
+	//move_camera(d);
 
     return (0);
 }

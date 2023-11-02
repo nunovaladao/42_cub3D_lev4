@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:52:49 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/31 21:08:12 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:49:05 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void draw_floor(t_mlx *m)
     int y;
     
     x = 0;
-    while (x < screenWidth)
+    while (x < SCREENWIDTH)
     {
-        y = screenHeight / 2;
-        while (y < screenHeight)
+        y = SCREENHEIGHT / 2;
+        while (y < SCREENHEIGHT)
         {
             my_mlx_pixel_put(m, x, y, 0x000000);
             y++;
@@ -50,12 +50,12 @@ void ceiling(t_mlx *m)
     int y;
     
     x = 0;
-    while (x < screenWidth)
+    while (x < SCREENWIDTH)
     {
         y = 0;
-        while (y < screenHeight / 2)
+        while (y < SCREENHEIGHT / 2)
         {
-            my_mlx_pixel_put(m, x, y, 0xFFFFFF);
+            my_mlx_pixel_put(m, x, y, 0x808080);
             y++;
         }
         x++;
@@ -66,5 +66,5 @@ void background(t_mlx *m)
 {
     ceiling(m);
     draw_floor(m);
-    mlx_put_image_to_window(m->mlx, m->mlx_win, m->img, 0, 0);
+    //mlx_put_image_to_window(m->mlx, m->mlx_win, m->img, 0, 0);
 }

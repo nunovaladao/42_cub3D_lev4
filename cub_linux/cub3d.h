@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/31 21:07:22 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:11:04 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@
 # define EAST 2
 # define WEST 3
 
-# define texWidth 64
-# define texHeight 64
-# define screenWidth 800
-# define screenHeight 600
+# define MARGIN 0.5
+# define TEXWIDTH 64
+# define TEXTHEIGHT 64
+# define SCREENWIDTH 800
+# define SCREENHEIGHT 600
 
 
 typedef struct s_rgb
@@ -151,12 +152,12 @@ void background(t_mlx *m);
 int render_next_frame(void *param);
 
 // Moves
-void move_forward(t_data *d);
-void move_backward(t_data *d);
-void move_left(t_data *d);
-void move_right(t_data *d);
-void rotate_left(t_data *d);
-void rotate_right(t_data *d);
+void move_forward(t_mlx *m);
+void move_backward(t_mlx *m);
+void move_left(t_mlx *m);
+void move_right(t_mlx *m);
+void rotate_left(t_mlx *m);
+void rotate_right(t_mlx *m);
 void move_camera(t_data *d);
 
 # endif

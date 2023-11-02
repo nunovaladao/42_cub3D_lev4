@@ -6,11 +6,19 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:48:39 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/31 21:07:03 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:20:10 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int game(t_data *data)
+{
+	render_next_frame(data);
+	move_camera(data);
+	mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->img, 0, 0);
+	return (0);
+}
 
 int main(int ac, char **av)
 {
@@ -21,19 +29,18 @@ int main(int ac, char **av)
 	if (check_args(ac, av) == 1)
 		exit(1);
 	init_all(&mlx, &data, &map);
+	
 	// check / read map
 	map.map_file = av[1];
 	check_map(&map);
 
 	open_window(&mlx);
 	init_textures(&data);
-	
-	mlx_hook(mlx.mlx_win, 2, 0, keyboard_hook, &mlx);
-	mlx_hook(mlx.mlx_win, 3, 0, keyboard_keyrelease, &mlx);
-	mlx_hook(m->mlx_win, 17, 0, (void *)mlx_exit, m);
-	mlx_loop_hook(mlx.mlx, render_next_frame, &data);
-    hook_events(&mlx);
+
+	mlx_hook(mlx.mlx_win, 2, 1L << 0, keyboard_hook, &mlx);
+	mlx_hook(mlx.mlx_win, 3, 1L << 1, keyboard_keyrelease, &mlx);
+	mlx_hook(mlx.mlx_win, 17, 0, (void *)mlx_exit, &mlx);
+	mlx_loop_hook(mlx.mlx, game, &data);
 	mlx_loop(mlx.mlx);
-    
     return (0);
 }

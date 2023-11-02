@@ -6,7 +6,7 @@
 #    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 17:52:53 by nsoares-          #+#    #+#              #
-#    Updated: 2023/10/31 20:59:10 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/11/02 11:36:55 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ all: compilation_start $(NAME)
 
 $(NAME): $(OBJS_FILES)
 		$(MAKE) --no-print-directory -C ./libft
+		@ chmod 777 ./minilibx-linux/./configure
 		$(MAKE) --no-print-directory -C ./minilibx-linux
 		$(CC) $(CFLAGS) $(SOURCE_FILES) $(LIBFT) $(MLX) -o $(NAME)
 		@ $(CUB3D_READY)
