@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:57:35 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/06 10:15:51 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/06 11:52:19 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int keyboard_hook(int keycode, t_mlx *m)
     if (keycode == S)
         m->data->dey = -0.05;
     if (keycode == A)
-        m->data->dex = 0.05;
-    if (keycode == D)
         m->data->dex = -0.05;
+    if (keycode == D)
+        m->data->dex = 0.05;
     if (keycode == LEFT)
         m->data->rot = 0.05;
     if (keycode == RIGHT)
