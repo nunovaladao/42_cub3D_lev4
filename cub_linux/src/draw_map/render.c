@@ -163,10 +163,6 @@ int render_next_frame(void *param)
 			y++;
 		}
 	}
-	//mlx_put_image_to_window(d->mlx->mlx, d->mlx->mlx_win, d->mlx->img, 0, 0);
-
-	/* d->moveSpeed = 0.05; //the constant value is in squares/second
-    d->rotSpeed = 0.01; //the constant value is in radians/second */
 
     return (0);
 }

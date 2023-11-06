@@ -16,7 +16,6 @@ int game(t_data *data)
 {
 	update_moves(data, data->rot);
 	render_next_frame(data);
-	//move_camera(data);
 	mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->img, 0, 0);
 	return (0);
 }

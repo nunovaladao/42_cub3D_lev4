@@ -26,8 +26,7 @@ MLX = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11 -lm
 SOURCE_FILES = gnl/get_next_line.c gnl/get_next_line_utils.c \
 				main.c src/moves/hook.c src/cub_utils.c src/inits/window.c src/inits/init.c \
 				src/parser/file_access.c src/parser/check_args.c src/draw_map/draw.c \
-				src/moves/moves.c src/moves/move_rotate.c src/map_construct/map.c src/draw_map/render.c \
-				src/moves/handle_moves.c
+				src/map_construct/map.c src/draw_map/render.c 
 				
 
 OBJS_FILES = $(SOURCE_FILES:.c=.o)
