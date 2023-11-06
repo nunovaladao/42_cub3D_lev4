@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:48:39 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/02 14:20:10 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/03 18:00:36 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int game(t_data *data)
 {
+	update_moves(data, data->rot);
 	render_next_frame(data);
-	move_camera(data);
+	//move_camera(data);
 	mlx_put_image_to_window(data->mlx->mlx, data->mlx->mlx_win, data->mlx->img, 0, 0);
 	return (0);
 }

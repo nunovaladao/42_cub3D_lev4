@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/02 17:11:04 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:55:20 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define EAST 2
 # define WEST 3
 
-# define MARGIN 0.5
+//# define MARGIN 0.5
 # define TEXWIDTH 64
 # define TEXTHEIGHT 64
 # define SCREENWIDTH 800
@@ -88,17 +88,21 @@ typedef struct	s_data
 	int lineHeight;
 	int drawStart;
 	int drawEnd;
-	double moveSpeed;
-	double rotSpeed;
+	/* double moveSpeed;
+	double rotSpeed; */
 	double oldDirX;
 	double oldPlaneX;
 	int texX;
-	int flag_up;
+	/* int flag_up;
 	int flag_down;
 	int flag_left;
 	int flag_right;
 	int flag_rot_left;
-	int flag_rot_right;
+	int flag_rot_right; */
+	double dey;
+	double dex;
+	double rot;
+	double totalrots;
 
 	t_mlx *mlx;
 	struct s_map *map;
@@ -152,12 +156,13 @@ void background(t_mlx *m);
 int render_next_frame(void *param);
 
 // Moves
-void move_forward(t_mlx *m);
+void	update_moves(t_data *data, double rot);
+/* void move_forward(t_mlx *m);
 void move_backward(t_mlx *m);
 void move_left(t_mlx *m);
 void move_right(t_mlx *m);
 void rotate_left(t_mlx *m);
 void rotate_right(t_mlx *m);
-void move_camera(t_data *d);
+void move_camera(t_data *d); */
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/31 20:45:40 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:56:58 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,21 @@ void init_data(t_data *data, t_mlx *m, struct s_map *map)
     data->lineHeight = 0;
     data->drawStart = 0;
     data->drawEnd = 0;
-    data->moveSpeed = 0.0;
-    data->rotSpeed = 0.0;
+    /* data->moveSpeed = 0.0;
+    data->rotSpeed = 0.0; */
     data->oldDirX = 0.0;
     data->oldPlaneX = 0.0;
     data->texX = 0;
-    data->flag_up = 0;
+    /* data->flag_up = 0;
     data->flag_down = 0;
     data->flag_left = 0;
     data->flag_right = 0;
     data->flag_rot_left = 0;
-    data->flag_rot_right = 0;
+    data->flag_rot_right = 0; */
+    data->dex = 0.0;
+    data->dey = 0.0;
+    data->rot = 0.0;
+    data->totalrots = 0.0;
     
     data->mlx = m;
     data->map = map;

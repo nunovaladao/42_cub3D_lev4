@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:45:29 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/02 17:25:09 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:56:11 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,10 +165,8 @@ int render_next_frame(void *param)
 	}
 	//mlx_put_image_to_window(d->mlx->mlx, d->mlx->mlx_win, d->mlx->img, 0, 0);
 
-	d->moveSpeed = 0.05; //the constant value is in squares/second
-    d->rotSpeed = 0.01; //the constant value is in radians/second
-
-	//move_camera(d);
+	/* d->moveSpeed = 0.05; //the constant value is in squares/second
+    d->rotSpeed = 0.01; //the constant value is in radians/second */
 
     return (0);
 }
