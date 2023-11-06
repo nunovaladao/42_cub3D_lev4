@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:48:39 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/03 16:16:29 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:05:38 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ int main(int ac, char **av)
 	mlx_hook(mlx.mlx_win, 17, 0, (void *)mlx_exit, &mlx);
 	mlx_loop_hook(mlx.mlx, game, &data);
 	mlx_loop(mlx.mlx);
-    
     return (0);
 }

@@ -6,23 +6,11 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/03 16:19:57 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:34:45 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
-void init_textures(t_data *d)
-{
-    d->text[NORTH].img = mlx_xpm_file_to_image(d->mlx->mlx, d->map->n_texture, &d->text[NORTH].t_w, &d->text[NORTH].t_h);
-    d->text[NORTH].addr = mlx_get_data_addr(d->text[NORTH].img, &d->text[NORTH].bits_per_pixel, &d->text[NORTH].line_length, &d->text[NORTH].endian);
-    d->text[SOUTH].img = mlx_xpm_file_to_image(d->mlx->mlx, d->map->s_texture, &d->text[SOUTH].t_w, &d->text[SOUTH].t_h);
-    d->text[SOUTH].addr = mlx_get_data_addr(d->text[SOUTH].img, &d->text[SOUTH].bits_per_pixel, &d->text[SOUTH].line_length, &d->text[SOUTH].endian);
-    d->text[WEST].img = mlx_xpm_file_to_image(d->mlx->mlx, d->map->w_texture, &d->text[WEST].t_w, &d->text[WEST].t_h);
-    d->text[WEST].addr = mlx_get_data_addr(d->text[WEST].img, &d->text[WEST].bits_per_pixel, &d->text[WEST].line_length, &d->text[WEST].endian);
-    d->text[EAST].img = mlx_xpm_file_to_image(d->mlx->mlx, d->map->e_texture, &d->text[EAST].t_w, &d->text[EAST].t_h);
-    d->text[EAST].addr = mlx_get_data_addr(d->text[EAST].img, &d->text[EAST].bits_per_pixel, &d->text[EAST].line_length, &d->text[EAST].endian);
-}
 
 void init_mlx(t_mlx *m, t_data *data)
 {
@@ -30,9 +18,23 @@ void init_mlx(t_mlx *m, t_data *data)
     m->mlx_win = NULL;
     m->data = data;
 }
+void init_other_data(t_data *data, t_mlx *m, struct s_map *map)
+{
+    data->texX = 0;
+    data->dex = 0.0;
+    data->dey = 0.0;
+    data->rot = 0.0;
+    data->totalrots = 0.0;
+    data->mlx = m;
+    data->map = map;
+    data->text = malloc(4 * sizeof(t_texture));
+    if (!data->text)
+        exit(EXIT_FAILURE);
+}
 
 void init_data(t_data *data, t_mlx *m, struct s_map *map)
 {
+    data->x = -1;
     data->posX = 22;
     data->posY = 12;
     data->dirX = -1;
@@ -56,19 +58,7 @@ void init_data(t_data *data, t_mlx *m, struct s_map *map)
     data->lineHeight = 0;
     data->drawStart = 0;
     data->drawEnd = 0;
-    data->oldDirX = 0.0;
-    data->oldPlaneX = 0.0;
-    data->texX = 0;
-    data->dex = 0.0;
-    data->dey = 0.0;
-    data->rot = 0.0;
-    data->totalrots = 0.0;
-    
-    data->mlx = m;
-    data->map = map;
-    data->text = malloc(4 * sizeof(t_texture));
-    if (!data->text)
-        exit(EXIT_FAILURE);
+    init_other_data(data, m, map);
 }
 
 void init_map(t_map *map, t_data *data)

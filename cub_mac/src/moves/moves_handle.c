@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:57:35 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/06 11:52:19 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:32:27 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	update_moves(t_data *data, double rot)
 {
 	double	olddirX;
-	double	oldplanex;
+	double	oldplaneX;
 
 	olddirX = data->dirX;
 	data->totalrots += rot;
 	data->dirX = data->dirX * cos(rot) - data->dirY * sin(rot);
 	data->dirY = olddirX * sin(rot) + data->dirY * cos(rot);
-	oldplanex = data->planeX;
+	oldplaneX = data->planeX;
 	data->planeX = data->planeX * cos(rot) - data->planeY * sin(rot);
-	data->planeY = oldplanex * sin(rot) + data->planeY * cos(rot);
+	data->planeY = oldplaneX * sin(rot) + data->planeY * cos(rot);
 	if (!ft_strchr("1", data->map->worldMap[(int)(data->posX + \
 			data->dirX * data->dey)][(int)(data->posY)]))
 		data->posX += data->dirX * data->dey;
@@ -51,25 +51,25 @@ int keyboard_hook(int keycode, t_mlx *m)
     if (keycode == D)
         m->data->dex = 0.05;
     if (keycode == LEFT)
-        m->data->rot = 0.05;
+        m->data->rot = 0.03;
     if (keycode == RIGHT)
-        m->data->rot = -0.05;
+        m->data->rot = -0.03;
     return (0);
 }
 
 int keyboard_keyrelease(int keycode, t_mlx *m)
 {
-    if (keycode == 13)
+    if (keycode == W)
         m->data->dey = 0;
-    if (keycode == 1)
+    if (keycode == S)
         m->data->dey = 0;
-    if (keycode == 2)
+    if (keycode == A)
         m->data->dex = 0;
-    if (keycode == 0)
+    if (keycode == D)
         m->data->dex = 0;
-    if (keycode == 123)
+    if (keycode == LEFT)
         m->data->rot = 0;
-    if (keycode == 124)
+    if (keycode == RIGHT)
         m->data->rot = 0;
     return (0);
 }
