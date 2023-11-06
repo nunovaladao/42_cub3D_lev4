@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/03 17:55:20 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:49:56 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct	s_mlx
 
 typedef struct	s_data
 {
+	int x;
 	double posX;
 	double posY;
 	double dirX;
@@ -87,8 +88,6 @@ typedef struct	s_data
 	int lineHeight;
 	int drawStart;
 	int drawEnd;
-	double oldDirX;
-	double oldPlaneX;
 	int texX;
 	double dey;
 	double dex;
@@ -107,6 +106,8 @@ typedef struct	s_map
    /*  int mapWidth;
 	int mapHeight; */
 	double wallX;
+	double step;
+	double texPos;
 	char *map_file;
 	int fd;
 	char *line;
@@ -117,8 +118,6 @@ typedef struct	s_map
 	char *e_texture;
 	char *floor_texture;
 	char *ceiling_texture;
-	double step;
-	double texPos;
 	t_data *data;
 }				t_map;
 
@@ -145,6 +144,10 @@ void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color);
 int	my_mlx_pixel_get(t_texture *t, int x, int y);
 void background(t_mlx *m);
 int render_next_frame(void *param);
+void calculations(t_data *d);
+void perform_dda(t_data *d);
+void draw_texture(t_data *d);
+void calc_wall_pixel(t_data *d);
 
 // Moves
 void	update_moves(t_data *data, double rot);

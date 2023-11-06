@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:03:21 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/24 23:03:43 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:49:20 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 
 void	mlx_exit(t_mlx *m)
 {
-	mlx_destroy_image(m->mlx, m->img);
-	mlx_destroy_window(m->mlx, m->mlx_win);
+	int i;
+
+	i = -1;
+	if (m->mlx)
+		mlx_clear_window(m->mlx, m->mlx_win);
+	if (m->mlx)
+		mlx_destroy_window(m->mlx, m->mlx_win);
+	if (m->mlx)
+		mlx_destroy_image(m->mlx, m->img);
+	while (++i < 4)
+		mlx_destroy_image(m->mlx, m->data->text[i].img);
+	/* if (m->mlx_win)
+		mlx_destroy_display(m->mlx); */
 	free(m->mlx);
 	exit(EXIT_SUCCESS);
 }
