@@ -25,8 +25,11 @@ void	mlx_exit(t_mlx *m)
 		mlx_destroy_image(m->mlx, m->img);
 	while (++i < 4)
 		mlx_destroy_image(m->mlx, m->data->text[i].img);
-	/* if (m->mlx_win)
-		mlx_destroy_display(m->mlx); */
+	if (m->mlx_win)
+		mlx_destroy_display(m->mlx);
+	if (m->data->text)
+		free(m->data->text);
+	free_map(m->data->map);
 	free(m->mlx);
 	exit(EXIT_SUCCESS);
 }

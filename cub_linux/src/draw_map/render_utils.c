@@ -15,21 +15,21 @@
 void draw_texture(t_data *d)
 {
     //x coordinate on the texture
-    d->texX = (int)(d->map->wallX * (double)texWidth);
+    d->texX = (int)(d->map->wallX * (double)TEXWIDTH);
 	if (d->side == '0' && d->rayDirX > 0)
-		d->texX = texWidth - d->texX - 1;
+		d->texX = TEXWIDTH - d->texX - 1;
 	if (d->side == '1' && d->rayDirY < 0)
-		d->texX = texWidth - d->texX - 1;
+		d->texX = TEXWIDTH - d->texX - 1;
 
 		// How much to increase the texture coordinate per screen pixel
-	d->map->step = 1.0 * texHeight / d->lineHeight;
+	d->map->step = 1.0 * TEXTHEIGHT / d->lineHeight;
 		// Starting texture coordinate
-	d->map->texPos = (d->drawStart - (double)screenHeight / 2 + (double)d->lineHeight / 2) * d->map->step;
+	d->map->texPos = (d->drawStart - (double)SCREENHEIGHT / 2 + (double)d->lineHeight / 2) * d->map->step;
 
 	int y = d->drawStart - 1;
 	while (++y < d->drawEnd)
 	{
-		int texY = (int)d->map->texPos & (texHeight - 1);
+		int texY = (int)d->map->texPos & (TEXTHEIGHT - 1);
 		d->map->texPos += d->map->step;
 
 		if (d->side == '0' && d->rayDirX > 0)
@@ -46,18 +46,18 @@ void draw_texture(t_data *d)
 void calc_wall_pixel(t_data *d)
 {
     //Calculate height of line to draw on screen
-	d->lineHeight = (int)(screenHeight / d->perpWallDist);
+	d->lineHeight = (int)(SCREENHEIGHT / d->perpWallDist);
 
 	//calculate lowest and highest pixel to fill in current stripe
-	d->drawStart = -d->lineHeight / 2 + screenHeight / 2;
+	d->drawStart = -d->lineHeight / 2 + SCREENHEIGHT / 2;
 
 	if (d->drawStart < 0)
 		d->drawStart = 0;
 
-	d->drawEnd = d->lineHeight / 2 + screenHeight / 2;
+	d->drawEnd = d->lineHeight / 2 + SCREENHEIGHT / 2;
 
-	if (d->drawEnd >= screenHeight)
-		d->drawEnd = screenHeight - 1;
+	if (d->drawEnd >= SCREENHEIGHT)
+		d->drawEnd = SCREENHEIGHT - 1;
 
 	//calculate value of wallX
 	//double wallX; //where exactly the wall was hit
@@ -94,7 +94,7 @@ void check_side(t_data *d)
 
 void calculations(t_data *d)
 {
-    d->cameraX = 2 * (double)d->x / (double)screenWidth - 1; //d->-coordinate in camera space
+    d->cameraX = 2 * (double)d->x / (double)SCREENWIDTH - 1; //d->-coordinate in camera space
     d->rayDirX = d->dirX + d->planeX * d->cameraX;
     d->rayDirY = d->dirY + d->planeY * d->cameraX;
     d->mapX = (int)d->posX;

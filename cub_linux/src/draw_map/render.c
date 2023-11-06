@@ -18,7 +18,7 @@ int render_next_frame(void *param)
 
     background(d->mlx);
 	d->x = -1;
-	while (++d->x < screenWidth)
+	while (++d->x < SCREENWIDTH)
     {
 		calculations(d);
 		perform_dda(d);

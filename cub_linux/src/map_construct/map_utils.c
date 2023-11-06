@@ -11,3 +11,24 @@
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+void free_map(t_map *m)
+{
+    int i;
+
+    i = -1;
+    /* if (m->n_texture)
+        free(m->n_texture);
+    if (m->s_texture)
+        free(m->s_texture);
+    if (m->w_texture)
+        free(m->w_texture);
+    if (m->e_texture)
+        free(m->e_texture); */
+    if (m->worldMap)
+    {
+        while (++i < m->nr_rows)
+            free(m->worldMap[i]);
+        free(m->worldMap);
+    }
+}

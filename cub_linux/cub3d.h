@@ -138,6 +138,7 @@ int check_file_extension(char *file_name);
 
 // Map
 void check_map(t_map *map);
+void free_map(t_map *m);
 
 // Draw
 void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color);
