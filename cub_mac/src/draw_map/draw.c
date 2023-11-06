@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:52:49 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/30 16:01:56 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/02 22:14:51 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ void background(t_mlx *m)
 {
     ceiling(m);
     draw_floor(m);
-    mlx_put_image_to_window(m->mlx, m->mlx_win, m->img, 0, 0);
 }

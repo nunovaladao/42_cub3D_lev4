@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:45:29 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/31 20:44:58 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:17:28 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int render_next_frame(void *param)
        	//length of ray from one x or y-side to next x or y-side
 		//double deltaDistX = 0;
 
-		/* if (d->rayDirX == 0)
+		if (d->rayDirX == 0)
 			d->deltaDistX = 1e30;
-		else */
+		else
 			d->deltaDistX = fabs(1.0 / d->rayDirX);
 
 		//double deltaDistY = 0;
-		/* if (d->rayDirY == 0)
+		if (d->rayDirY == 0)
 			d->deltaDistY = 1e30;
-		else */
+		else
 			d->deltaDistY = fabs(1.0 / d->rayDirY);
 
 		//double perpWallDist;
@@ -109,18 +109,18 @@ int render_next_frame(void *param)
       	else
 			d->perpWallDist = (d->sideDistY - d->deltaDistY);
 
-		// int pitch = 100;
+		int pitch = 0; // pitch faz um ajuste vertical na posição de início do desenho da textura
 
 		//Calculate height of line to draw on screen
 		d->lineHeight = (int)(screenHeight / d->perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe
-		d->drawStart = -d->lineHeight / 2 + screenHeight / 2;
+		d->drawStart = -d->lineHeight / 2 + screenHeight / 2 + pitch;
 
 		if (d->drawStart < 0)
 			d->drawStart = 0;
 
-		d->drawEnd = d->lineHeight / 2 + screenHeight / 2;
+		d->drawEnd = d->lineHeight / 2 + screenHeight / 2 + pitch;
 
 		if (d->drawEnd >= screenHeight)
 			d->drawEnd = screenHeight - 1;
@@ -143,32 +143,25 @@ int render_next_frame(void *param)
 		// How much to increase the texture coordinate per screen pixel
 		d->map->step = 1.0 * texHeight / d->lineHeight;
 		// Starting texture coordinate
-		d->map->texPos = (d->drawStart - screenHeight / 2 + d->lineHeight / 2) * d->map->step;
+		d->map->texPos = (d->drawStart - pitch - (double)screenHeight / 2 + (double)d->lineHeight / 2) * d->map->step;
 
 
-		int y = d->drawStart;
-		while (y < d->drawEnd)
+		int y = d->drawStart - 1;
+		while (++y < d->drawEnd)
 		{
 			int texY = (int)d->map->texPos & (texHeight - 1);
 			d->map->texPos += d->map->step;
 
-			if (d->side == '0' && d->rayDirX < 0)
-				my_mlx_pixel_put(d->mlx, x, y, (unsigned int)my_mlx_pixel_get(&d->text[NORTH], d->texX, texY));
-			else if (d->side == '0' && d->rayDirX > 0)
+			if (d->side == '0' && d->rayDirX > 0)
 				my_mlx_pixel_put(d->mlx, x, y, (unsigned int)my_mlx_pixel_get(&d->text[SOUTH], d->texX, texY));
+			else if (d->side == '0' && d->rayDirX < 0)
+				my_mlx_pixel_put(d->mlx, x, y, (unsigned int)my_mlx_pixel_get(&d->text[NORTH], d->texX, texY));
 			else if (d->side == '1' && d->rayDirY > 0)
 				my_mlx_pixel_put(d->mlx, x, y, (unsigned int)my_mlx_pixel_get(&d->text[EAST], d->texX, texY));
 			else if (d->side == '1' && d->rayDirY < 0)
 				my_mlx_pixel_put(d->mlx, x, y, (unsigned int)my_mlx_pixel_get(&d->text[WEST], d->texX, texY));
-			y++;
 		}
-		mlx_put_image_to_window(d->mlx->mlx, d->mlx->mlx_win, d->mlx->img, 0, 0);
+		
 	}
-
-	d->moveSpeed = 2; //the constant value is in squares/second
-    d->rotSpeed = 0.5; //the constant value is in radians/second
-
-	move_camera(d);
-
     return (0);
 }

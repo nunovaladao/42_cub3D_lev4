@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/31 20:57:51 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/06 10:15:04 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,19 @@
 # define EAST 2
 # define WEST 3
 
-
+//# define MARGIN 0.5
 # define texWidth 64
 # define texHeight 64
 # define screenWidth 800
 # define screenHeight 600
 
-/* # define ESC 53
+# define ESC 53
 # define W 13
 # define A 0
 # define S 1
 # define D 2
 # define LEFT 123
-# define RIGHT 124 */
+# define RIGHT 124
 
 typedef struct s_rgb
 {
@@ -93,17 +93,13 @@ typedef struct	s_data
 	int lineHeight;
 	int drawStart;
 	int drawEnd;
-	double moveSpeed;
-	double rotSpeed;
 	double oldDirX;
 	double oldPlaneX;
 	int texX;
-	int flag_up;
-	int flag_down;
-	int flag_left;
-	int flag_right;
-	int flag_rot_left;
-	int flag_rot_right;
+	double dey;
+	double dex;
+	double rot;
+	double totalrots;
 
 	t_mlx *mlx;
 	struct s_map *map;
@@ -134,7 +130,6 @@ typedef struct	s_map
 
 // Mlx
 void	mlx_exit(t_mlx *m);
-int	hook_events(t_mlx *m);
 void open_window(t_mlx *m);
 int keyboard_hook(int keycode, t_mlx *m);
 int keyboard_keyrelease(int keycode, t_mlx *m);
@@ -158,12 +153,6 @@ void background(t_mlx *m);
 int render_next_frame(void *param);
 
 // Moves
-void move_forward(t_data *d);
-void move_backward(t_data *d);
-void move_left(t_data *d);
-void move_right(t_data *d);
-void rotate_left(t_data *d);
-void rotate_right(t_data *d);
-void move_camera(t_data *d);
+void	update_moves(t_data *data, double rot);
 
 # endif
