@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/06 17:43:06 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/07 12:00:44 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ int check_file_extension(char *file_name);
 
 // Map
 void check_map(t_map *map);
+void free_map(t_map *m);
 
 // Draw
 void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color);

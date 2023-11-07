@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 20:03:21 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/06 17:34:18 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/07 12:01:32 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	mlx_exit(t_mlx *m)
 		mlx_destroy_image(m->mlx, m->data->text[i].img);
 	/* if (m->mlx_win)
 		mlx_destroy_display(m->mlx); */
+	if (m->data->text)
+		free(m->data->text);
+	free_map(m->data->map);
 	free(m->mlx);
 	exit(EXIT_SUCCESS);
 }

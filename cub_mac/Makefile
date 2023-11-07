@@ -6,7 +6,7 @@
 #    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 17:52:53 by nsoares-          #+#    #+#              #
-#    Updated: 2023/11/06 17:50:14 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/11/07 12:02:29 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SOURCE_FILES = gnl/get_next_line.c gnl/get_next_line_utils.c \
 				main.c src/moves/moves_handle.c src/cub_utils.c src/inits/window.c src/inits/init.c \
 				src/parser/file_access.c src/parser/check_args.c src/draw_map/draw.c \
 				src/map_construct/map.c src/draw_map/render.c src/draw_map/render_utils.c \
-				
+				src/map_construct/map_utils.c 
 
 OBJS_FILES = $(SOURCE_FILES:.c=.o)
 
