@@ -43,6 +43,8 @@ NO_COLOR	=	\033[0m
 
 COMPILATION_START	=	echo "\n$(BOLD_YELLOW)Make: $(NO_COLOR)Compilation start...\n"
 
+COMPILING_LIBFT	=	echo "\n$(BOLD_YELLOW)Make: $(NO_COLOR)Libft\n"
+
 CUB3D_READY  =   echo "\n$(BOLD_YELLOW)cub3D ready! ✅ \n"
 
 CLEANED		=	echo "\n$(BOLD_YELLOW)Clean: $(NO_COLOR)Removed all the \".o\" files \n"
@@ -56,10 +58,10 @@ RE          =   echo "\n$(BOLD_YELLOW)Re: $(NO_COLOR)Compilation restarted \n"
 all: compilation_start $(NAME)
 
 $(NAME): $(OBJS_FILES)
-		$(MAKE) --no-print-directory -C ./libft
-		@ chmod 777 ./minilibx-linux/./configure
-		$(MAKE) --no-print-directory -C ./minilibx-linux
-		$(CC) $(CFLAGS) $(SOURCE_FILES) $(LIBFT) $(MLX) -o $(NAME)
+		@ $(COMPILING_LIBFT)
+		@ $(MAKE) -C ./libft
+		$(MAKE) -C ./minilibx-linux
+		$(CC) $(SOURCE_FILES) $(CFLAGS) $(LIBFT) $(MLX) -o $(NAME)
 		@ $(CUB3D_READY)
 
 compilation_start:
