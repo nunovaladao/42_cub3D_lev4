@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:57:35 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 14:55:56 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/09 22:27:12 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 void	update_moves(t_data *data, double rot)
 {
-	double	olddirX;
-	double	oldplanex;
+	double	olddir_x;
+	double	oldplane_x;
 
-	olddirX = data->dirX;
+	olddir_x = data->dir_x;
 	data->totalrots += rot;
-	data->dirX = data->dirX * cos(rot) - data->dirY * sin(rot);
-	data->dirY = olddirX * sin(rot) + data->dirY * cos(rot);
-	oldplanex = data->planeX;
-	data->planeX = data->planeX * cos(rot) - data->planeY * sin(rot);
-	data->planeY = oldplanex * sin(rot) + data->planeY * cos(rot);
-	if (!ft_strchr("1", data->map->worldMap[(int)(data->posX + \
-			data->dirX * data->dey)][(int)(data->posY)]))
-		data->posX += data->dirX * data->dey;
-	if (!ft_strchr("1", data->map->worldMap[(int)(data->posX)] \
-			[(int)(data->posY + data->dirY * data->dey)]))
-		data->posY += data->dirY * data->dey;
-	if (!ft_strchr("1", data->map->worldMap[(int)(data->posX + \
-			data->planeX * data->dex)][(int)data->posY]))
-		data->posX += data->planeX * data->dex;
-	if (!ft_strchr("1", data->map->worldMap[(int)data->posX] \
-			[(int)(data->posY + data->planeY * data->dex)]))
-		data->posY += data->planeY * data->dex;
+	data->dir_x = data->dir_x * cos(rot) - data->dir_y * sin(rot);
+	data->dir_y = olddir_x * sin(rot) + data->dir_y * cos(rot);
+	oldplane_x = data->plane_x;
+	data->plane_x = data->plane_x * cos(rot) - data->plane_y * sin(rot);
+	data->plane_y = oldplane_x * sin(rot) + data->plane_y * cos(rot);
+	if (!ft_strchr("1", data->map->worldmap[(int)(data->pos_x + \
+			data->dir_x * data->dey)][(int)(data->pos_y)]))
+		data->pos_x += data->dir_x * data->dey;
+	if (!ft_strchr("1", data->map->worldmap[(int)(data->pos_x)] \
+			[(int)(data->pos_y + data->dir_y * data->dey)]))
+		data->pos_y += data->dir_y * data->dey;
+	if (!ft_strchr("1", data->map->worldmap[(int)(data->pos_x + \
+			data->plane_x * data->dex)][(int)data->pos_y]))
+		data->pos_x += data->plane_x * data->dex;
+	if (!ft_strchr("1", data->map->worldmap[(int)data->pos_x] \
+			[(int)(data->pos_y + data->plane_y * data->dex)]))
+		data->pos_y += data->plane_y * data->dex;
 }
 
 int keyboard_hook(int keycode, t_mlx *m)
