@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:57:35 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 22:27:12 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/09 23:20:00 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ int keyboard_hook(int keycode, t_mlx *m)
     if (keycode == XK_W || keycode == XK_w)
         m->data->dey = 0.03;
     if (keycode == XK_A || keycode == XK_a)
-        m->data->dex = -0.03; 
+        m->data->dex = -0.03;
     if (keycode == XK_D || keycode == XK_d)
-         m->data->dex = 0.03;
+        m->data->dex = 0.03;
     if (keycode == XK_Left)
         m->data->rot = 0.01;
     if (keycode == XK_Right)
         m->data->rot = -0.01;
-
     return (0);
 }
 
@@ -65,13 +64,12 @@ int keyboard_keyrelease(int keycode, t_mlx *m)
     if (keycode == XK_W || keycode == XK_w)
         m->data->dey = 0;
     if (keycode == XK_A || keycode == XK_a)
-        m->data->dex = 0; 
+        m->data->dex = 0;
     if (keycode == XK_D || keycode == XK_d)
-         m->data->dex = 0;
+        m->data->dex = 0;
     if (keycode == XK_Left)
         m->data->rot = 0;
     if (keycode == XK_Right)
         m->data->rot = 0;
-
     return (0);
 }

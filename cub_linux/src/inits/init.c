@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 22:36:32 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/09 23:26:36 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void init_mlx(t_mlx *m, t_data *data)
     m->mlx_win = NULL;
     m->data = data;
 }
+
 void init_other_data(t_data *data, t_mlx *m, struct s_map *map)
 {
     data->y = 0;
