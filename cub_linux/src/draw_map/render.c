@@ -24,7 +24,7 @@ int render_next_frame(void *param)
 
     background(d->mlx); // Draw the background color to the screen.
 	d->x = -1;
-	while (++d->x < screenWidth) // Loop through each vertical stripe of the screen.
+	while (++d->x < SCREENWIDTH) // Loop through each vertical stripe of the screen.
     {
 		calculations(d); // Calculate the ray position and direction.
 		perform_dda(d); // Perform DDA algorithm.
