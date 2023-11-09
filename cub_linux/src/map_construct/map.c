@@ -16,7 +16,7 @@ void print_world_map(t_map *map)
 {
     for (int i = 0; i < map->nr_rows; i++) 
     {
-        printf("%s", map->worldMap[i]);
+        printf("%s", map->worldmap[i]);
     }
 }
 
@@ -52,14 +52,14 @@ void get_map(t_map *map)
     i = -1;
     while ((line) && ++i < map->nr_rows)
     {
-        map->worldMap[i] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
+        map->worldmap[i] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
         j = 0;
         while (line[j])
         {
-            map->worldMap[i][j] = line[j];
+            map->worldmap[i][j] = line[j];
             j++;
         }
-        map->worldMap[i][j] = '\0';
+        map->worldmap[i][j] = '\0';
         free(line);
         line = get_next_line(fd);
     }
@@ -69,8 +69,8 @@ void get_map(t_map *map)
 void get_map_file(t_map *map)
 {
     map->nr_rows = get_rows(map);
-    map->worldMap = ft_calloc(map->nr_rows, sizeof(char *));
-    if (!map->worldMap)
+    map->worldmap = ft_calloc(map->nr_rows, sizeof(char *));
+    if (!map->worldmap)
     {
         printf("Error!\nMalloc failed\n");
         exit(0);

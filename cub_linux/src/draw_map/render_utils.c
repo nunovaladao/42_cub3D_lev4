@@ -17,14 +17,14 @@ void draw_texture(t_data *d) // Draw the texture to the screen.
 	// How much to increase the texture coordinate per screen pixel
 	d->map->step = 1.0 * TEXTHEIGHT / d->lineheight;
 	// Starting texture coordinate
-	d->map->texpos = (d->drawstart - (double)SCREENHEIGHT / 2 \
+	d->map->tex_pos = (d->drawstart - (double)SCREENHEIGHT / 2 \
 	+ (double)d->lineheight / 2) * d->map->step;
 
 	d->y = d->drawstart - 1;
 	while (++d->y < d->drawend)
 	{
-		d->tex_y = (int)d->map->texpos & (TEXTHEIGHT - 1);
-		d->map->texpos += d->map->step;
+		d->tex_y = (int)d->map->tex_pos & (TEXTHEIGHT - 1);
+		d->map->tex_pos += d->map->step;
 
 		if (d->side == '0' && d->raydir_x > 0)
 			my_mlx_pixel_put(d->mlx, d->x, d->y, (unsigned int) \
@@ -89,12 +89,12 @@ void check_side(t_data *d)
     }
     if (d->raydir_y < 0)
     {
-        d->stepY = -1;
+        d->step_y = -1;
         d->sidedist_y = (d->pos_y - d->map_y) * d->deltadist_y; // Distance to the next x or y-side
     }
     else
     {
-        d->stepY = 1;
+        d->step_y = 1;
         d->sidedist_y = (d->map_y + 1.0 - d->pos_y) * d->deltadist_y; // Distance to the next x or y-side
     }
 }
@@ -129,11 +129,11 @@ void perform_dda(t_data *d) // Perform DDA algorithm.
 		else
 		{
 			d->sidedist_y += d->deltadist_y;
-			d->map_y += d->stepY;
+			d->map_y += d->step_y;
             d->side = '1';
 		}
 		//Check if ray has hit a wall, when the ray has hit a wall, the loop ends
-		if (d->map->worldMap[d->map_x][d->map_y] > '0')
+		if (d->map->worldmap[d->map_x][d->map_y] > '0')
 			d->hit = '1';
 	}
 	// Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)

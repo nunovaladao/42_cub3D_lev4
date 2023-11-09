@@ -25,10 +25,10 @@ void free_map(t_map *m)
         free(m->w_texture);
     if (m->e_texture)
         free(m->e_texture); */
-    if (m->worldMap)
+    if (m->worldmap)
     {
         while (++i < m->nr_rows)
-            free(m->worldMap[i]);
-        free(m->worldMap);
+            free(m->worldmap[i]);
+        free(m->worldmap);
     }
 }
