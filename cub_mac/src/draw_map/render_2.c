@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:13:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/06 15:58:16 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/07 13:07:38 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ int render_next_frame(void *param)
 	//double posX = 22, posY = 12;  //x and y start position
   	double dirX = -1, dirY = 0; //initial direction vector
   	double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
-
-	//double time = 0; //time of current frame
-  	//double oldTime = 0; //time of previous frame
 
 	for (int x = 0; x < screenWidth; x++)
     {

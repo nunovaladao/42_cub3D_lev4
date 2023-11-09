@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/07 12:00:44 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:22:04 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct	s_mlx
 typedef struct	s_data
 {
 	int x;
+	int y;
 	double posX;
 	double posY;
 	double dirX;
@@ -95,6 +96,7 @@ typedef struct	s_data
 	int drawStart;
 	int drawEnd;
 	int texX;
+	int texY;
 	double dey;
 	double dex;
 	double rot;

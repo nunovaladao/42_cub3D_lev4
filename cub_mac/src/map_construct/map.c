@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:50:57 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/27 23:36:05 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:46:02 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,4 @@ void check_map(t_map *map)
     get_map_file(map);
     /* print_world_map(map);
     puts(""); */
-    
 }

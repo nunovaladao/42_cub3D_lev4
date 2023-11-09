@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/06 15:34:45 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:22:36 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void init_mlx(t_mlx *m, t_data *data)
 }
 void init_other_data(t_data *data, t_mlx *m, struct s_map *map)
 {
+    data->y = 0;
     data->texX = 0;
+    data->texY = 0;
     data->dex = 0.0;
     data->dey = 0.0;
     data->rot = 0.0;
@@ -34,7 +36,7 @@ void init_other_data(t_data *data, t_mlx *m, struct s_map *map)
 
 void init_data(t_data *data, t_mlx *m, struct s_map *map)
 {
-    data->x = -1;
+    data->x = 0;
     data->posX = 22;
     data->posY = 12;
     data->dirX = -1;
