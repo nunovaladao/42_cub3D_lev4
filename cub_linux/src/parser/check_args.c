@@ -12,16 +12,16 @@
 
 #include "../../cub3d.h"
 
-int    check_args(int ac, char **av)
+int	check_args(int ac, char **av)
 {
-    if (ac != 2)
-    {
-        printf("Error!\nUsage: ./cub3D 'map_path'\n");
-        return (1);
-    }
-    if (check_file(av[1]) == 1)
-        return (1);
-    if (check_file_extension(av[1]) == 1)
-        return (1);
-    return (0);
+	if (ac != 2)
+	{
+		printf("Error!\nUsage: ./cub3D 'map_path'\n");
+		return (1);
+	}
+	if (check_file(av[1]) == 1)
+		return (1);
+	if (check_file_extension(av[1]) == 1)
+		return (1);
+	return (0);
 }

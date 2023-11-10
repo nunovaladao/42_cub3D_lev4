@@ -12,32 +12,32 @@
 
 #include "../../cub3d.h"
 
-int		check_file(char *file)
+int	check_file(char *file)
 {
-    int		fd;
+	int	fd;
 
-    fd = open(file, O_RDONLY);
-    if (fd == -1)
-    {
-        printf("Error!\nFile not found...\n");
-        return (1);
-    }
-    close(fd);
-    return (0);
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error!\nFile not found...\n");
+		return (1);
+	}
+	close(fd);
+	return (0);
 }
 
-int check_file_extension(char *file_name)
+int	check_file_extension(char *file_name)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (file_name[i])
-        i++;
-    if (file_name[i - 1] != 'b' || file_name[i - 2] != 'u' || \
-    file_name[i - 3] != 'c' || file_name[i - 4] != '.')
-    {
-        printf("Error!\nFile extension not valid...\n");
-        return (1);
-    }
-    return (0);
+	i = 0;
+	while (file_name[i])
+		i++;
+	if (file_name[i - 1] != 'b' || file_name[i - 2] != 'u' || \
+	file_name[i - 3] != 'c' || file_name[i - 4] != '.')
+	{
+		printf("Error!\nFile extension not valid...\n");
+		return (1);
+	}
+	return (0);
 }
