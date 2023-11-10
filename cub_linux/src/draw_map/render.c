@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:45:29 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 12:52:12 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/10 00:19:31 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	render_next_frame(void *param)
 {
-	t_data *d;
+	t_data	*d;
 
 	d = param;
 	background(d->mlx); // Draw the background color to the screen.

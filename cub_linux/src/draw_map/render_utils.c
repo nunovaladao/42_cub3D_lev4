@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:16:56 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 22:21:35 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/10 00:22:19 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,18 @@ void	calc_wall_pixel(t_data *d) // Calculate the height of the wall.
 	d->map->wall_x -= floor((d->map->wall_x));
 
 	//x coordinate on the texture
-	d->tex_x = (int)(d->map->wall_x * (double)TEXWIDTH); 
-	if (d->side == '0' && d->raydir_x > 0) 
+	d->tex_x = (int)(d->map->wall_x * (double)TEXWIDTH);
+	if (d->side == '0' && d->raydir_x > 0)
 		d->tex_x = TEXWIDTH - d->tex_x - 1;
-	if (d->side == '1' && d->raydir_y < 0) 
+	if (d->side == '1' && d->raydir_y < 0)
 		d->tex_x = TEXWIDTH - d->tex_x - 1;
 }
 
 void	check_side(t_data *d)
 {
-	if (d->raydir_x < 0) 
+	if (d->raydir_x < 0)
 	{
-		d->step_x = -1; 
+		d->step_x = -1;
 		d->sidedist_x = (d->pos_x - d->map_x) * d->deltadist_x; // Distance to the next x or y-side
 	}
 	else
@@ -117,7 +117,7 @@ void	perform_dda(t_data *d) // Perform DDA algorithm.
 	d->hit = '0'; //was there a wall hit?
 	// It's a loop that increments the ray with 1 square every time, until a wall is hit.
 	// It always jumps 1 square at once, either in x-direction or in y-direction
-	while (d->hit == '0') 
+	while (d->hit == '0')
 	{
 			//jump to next map square, either in x-direction, or in y-direction
 		if (d->sidedist_x < d->sidedist_y)
@@ -142,4 +142,3 @@ void	perform_dda(t_data *d) // Perform DDA algorithm.
 	else
 		d->perpwalldist = (d->sidedist_y - d->deltadist_y);
 }
-

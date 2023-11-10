@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:52:49 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/02 15:49:05 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/10 00:18:51 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color)
 	char	*dst;
 
 	dst = m->addr + (y * m->line_length + x * (m->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
 void	draw_floor(t_mlx *m)
 {
 	int	x;
 	int	y;
-    
+
 	x = 0;
 	while (x < SCREENWIDTH)
 	{
@@ -48,7 +48,7 @@ void	ceiling(t_mlx *m)
 {
 	int	x;
 	int	y;
-    
+
 	x = 0;
 	while (x < SCREENWIDTH)
 	{
