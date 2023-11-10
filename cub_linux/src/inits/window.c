@@ -6,13 +6,13 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:58:07 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 23:25:44 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/10 10:33:05 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void    init_textures(t_data *d)
+void	init_textures(t_data *d)
 {
 	d->text[NORTH].img = mlx_xpm_file_to_image(d->mlx->mlx, \
 	d->map->n_texture, &d->text[NORTH].t_w, &d->text[NORTH].t_h);
@@ -36,7 +36,7 @@ void    init_textures(t_data *d)
 	&d->text[EAST].endian);
 }
 
-void open_window(t_mlx *m)
+void	open_window(t_mlx *m)
 {
 	m->mlx = mlx_init();
 	m->mlx_win = mlx_new_window(m->mlx, SCREENWIDTH, SCREENHEIGHT, "cub3D");

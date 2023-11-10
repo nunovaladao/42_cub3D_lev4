@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 23:26:36 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/10 00:14:28 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,3 @@ void	init_all(t_mlx *m, t_data *data, t_map *map)
 	init_data(data, m, map);
 	init_map(map, data);
 }
-

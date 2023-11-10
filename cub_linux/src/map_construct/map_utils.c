@@ -6,13 +6,13 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:51:28 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/07 11:59:45 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/10 10:36:38 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void free_map(t_map *m)
+void    free_map(t_map *m)
 {
     int i;
 
