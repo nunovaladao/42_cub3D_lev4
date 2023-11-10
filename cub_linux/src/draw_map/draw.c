@@ -26,45 +26,44 @@ void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void draw_floor(t_mlx *m)
+void	draw_floor(t_mlx *m)
 {
-    int x;
-    int y;
+	int	x;
+	int	y;
     
-    x = 0;
-    while (x < SCREENWIDTH)
-    {
-        y = SCREENHEIGHT / 2;
-        while (y < SCREENHEIGHT)
-        {
-            my_mlx_pixel_put(m, x, y, 0x000000);
-            y++;
-        }
-        x++;
-    }
+	x = 0;
+	while (x < SCREENWIDTH)
+	{
+		y = SCREENHEIGHT / 2;
+		while (y < SCREENHEIGHT)
+		{
+			my_mlx_pixel_put(m, x, y, 0x000000);
+			y++;
+		}
+		x++;
+	}
 }
 
-void ceiling(t_mlx *m)
+void	ceiling(t_mlx *m)
 {
-    int x;
-    int y;
+	int	x;
+	int	y;
     
-    x = 0;
-    while (x < SCREENWIDTH)
-    {
-        y = 0;
-        while (y < SCREENHEIGHT / 2)
-        {
-            my_mlx_pixel_put(m, x, y, 0x808080);
-            y++;
-        }
-        x++;
-    }
+	x = 0;
+	while (x < SCREENWIDTH)
+	{
+		y = 0;
+		while (y < SCREENHEIGHT / 2)
+		{
+			my_mlx_pixel_put(m, x, y, 0x808080);
+			y++;
+		}
+		x++;
+	}
 }
 
-void background(t_mlx *m)
+void	background(t_mlx *m)
 {
-    ceiling(m);
-    draw_floor(m);
-    //mlx_put_image_to_window(m->mlx, m->mlx_win, m->img, 0, 0);
+	ceiling(m);
+	draw_floor(m);
 }

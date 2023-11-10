@@ -38,38 +38,38 @@ void	update_moves(t_data *data, double rot)
 		data->pos_y += data->plane_y * data->dex;
 }
 
-int keyboard_hook(int keycode, t_mlx *m)
+int	keyboard_hook(int keycode, t_mlx *m)
 {
-    if (keycode == XK_Escape)
-        mlx_exit(m);
-    if (keycode == XK_S || keycode == XK_s)
-        m->data->dey = -0.03;
-    if (keycode == XK_W || keycode == XK_w)
-        m->data->dey = 0.03;
-    if (keycode == XK_A || keycode == XK_a)
-        m->data->dex = -0.03;
-    if (keycode == XK_D || keycode == XK_d)
-        m->data->dex = 0.03;
-    if (keycode == XK_Left)
-        m->data->rot = 0.01;
-    if (keycode == XK_Right)
-        m->data->rot = -0.01;
-    return (0);
+	if (keycode == XK_Escape)
+		mlx_exit(m);
+	if (keycode == XK_S || keycode == XK_s)
+		m->data->dey = -0.03;
+	if (keycode == XK_W || keycode == XK_w)
+		m->data->dey = 0.03;
+	if (keycode == XK_A || keycode == XK_a)
+		m->data->dex = -0.03;
+	if (keycode == XK_D || keycode == XK_d)
+		m->data->dex = 0.03;
+	if (keycode == XK_Left)
+		m->data->rot = 0.01;
+	if (keycode == XK_Right)
+		m->data->rot = -0.01;
+	return (0);
 }
 
-int keyboard_keyrelease(int keycode, t_mlx *m)
+int	keyboard_keyrelease(int keycode, t_mlx *m)
 {
-    if (keycode == XK_S || keycode == XK_s)
-        m->data->dey = 0;
-    if (keycode == XK_W || keycode == XK_w)
-        m->data->dey = 0;
-    if (keycode == XK_A || keycode == XK_a)
-        m->data->dex = 0;
-    if (keycode == XK_D || keycode == XK_d)
-        m->data->dex = 0;
-    if (keycode == XK_Left)
-        m->data->rot = 0;
-    if (keycode == XK_Right)
-        m->data->rot = 0;
-    return (0);
+	if (keycode == XK_S || keycode == XK_s)
+		m->data->dey = 0;
+	if (keycode == XK_W || keycode == XK_w)
+		m->data->dey = 0;
+	if (keycode == XK_A || keycode == XK_a)
+		m->data->dex = 0;
+	if (keycode == XK_D || keycode == XK_d)
+		m->data->dex = 0;
+	if (keycode == XK_Left)
+		m->data->rot = 0;
+	if (keycode == XK_Right)
+		m->data->rot = 0;
+	return (0);
 }
