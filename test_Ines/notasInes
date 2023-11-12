@@ -1,0 +1,9 @@
+Ficheiro testParser:
+-> verificar as funcoes usando as que nao sou da libft tenho de mudar isso; -> ja esta
+_> posso usar a trim para retirar os espacos no inicio e fim; -> ok
+-> regiao de texturas (regiao para ser mais facil perceber):
+	->ja guarda o que e suposto;
+	-> penso que os possiveis erros estao todos tratados;
+-> regiao de cores:
+	-> guarda como string nao sei se e suposto guardar como int;
+
