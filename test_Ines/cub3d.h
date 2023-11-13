@@ -18,8 +18,8 @@
 # include "gnl/get_next_line.h"
 
 # include <math.h>
-# include <X11/keysym.h>
-# include <X11/X.h>
+//# include <X11/keysym.h>
+//# include <X11/X.h>
 
 # define SOUTH 0
 # define NORTH 1
