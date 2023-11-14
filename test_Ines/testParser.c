@@ -22,7 +22,7 @@ char *get_string(char *test)
     int j;
 
     i = 0;
-    if (test[0] != ' ' || test[0] != '\t')
+    if (test[0] != ' ' && test[0] != '\t')
     {
         printf("character not correct\n");
         return NULL;
@@ -30,7 +30,7 @@ char *get_string(char *test)
     length = ft_strlen(test);
     while (test[i] != '.')
     {
-        if (test[i] != ' ')
+        if (test[i] != ' ' && test[i] != '\t')
         {
             printf("character not correct\n");
             return NULL;
@@ -86,23 +86,27 @@ int get_factors_rgb(int *i, char *test)
     int final;
     char *str;
 
-    while (test[*i] == ' ')
+    while (test[*i] == ' ' || test[*i] == '\t')
         (*i)++;
     init = *i;
-    while (test[*i] != ',' && test[*i] != '\n' && test[*i] != '\0'&& test[*i] != ' ' && test[*i] != '\t')
+    while (test[*i] >= '0' && test[*i] <= '9')
+        (*i)++;
+    if (*i == init)
+        return (-1);
+    final = *i;
+    while (test[*i] != ',' && test[*i] != '\n' && test[*i] != '\0')
     {
-        if ((test[*i] < '0' || test[*i] > '9'))
+        if (test[*i] != ' ' && test[*i] != '\t')
         {
             printf("Error in color\n");
             return (-1);
         }
         (*i)++;
     }
-    final = *i;
     str = (char *)malloc(sizeof(char) * (final - init + 1));
     str = &test[init];
     str[final - init] = '\0';
-    return (ft_atoi(str)); //atoi
+    return (ft_atoi(str));
 }
 
 /** @brief with a base transform rgb to hexa
@@ -173,7 +177,10 @@ int get_colors(char *test, t_map *map)
     i++;
     color.b = get_factors_rgb(&i, test);
     if (color.r < 0 || color.g < 0 || color.b < 0)
+    {
+        printf("Invalid value!\n");
         return 1;
+    }
     str = get_hexa(color);
     if (!str)
         return (1);
@@ -245,4 +252,6 @@ int main(int argc, char *argv[], char *envp[])
     printf("%s\n", map->s_texture);
     printf("%s\n", map->w_texture);
     printf("%s\n", map->e_texture);
+    printf("%s\n", map->color_c);
+    printf("%s\n", map->color_f);
 }

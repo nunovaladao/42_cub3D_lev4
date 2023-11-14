@@ -1,8 +1,8 @@
-    NO ./path_to_the_north_textureN
-SO ./path_to_the_south_textureS
-WE    ./path_to_the_west_textureW
+    NO      ./path_to_the_north_textureN
+SO     ./path_to_the_south_textureS
+WE ./path_to_the_west_textureW
    EA ./path_to_the_east_textureE
 
 
-F 20,    100   ,0
-   C      256,30,0
+F -25, 30  , 230
+   C      255,65,27

@@ -12,7 +12,7 @@
 
 NAME = cub3D
 
-CC = cc 
+CC = cc -g
 RM = rm -rf
 LIBFT = ./libft/libft.a
 
