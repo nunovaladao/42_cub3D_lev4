@@ -4,7 +4,6 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "cub3d.h"
-#include "libft.h"
 #include <string.h>
 #include <stdlib.h>
 
