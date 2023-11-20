@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:01:09 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/20 15:38:08 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:45:43 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	check_file(char *file)
 
 int	check_file_extension(char *file_name)
 {
-	int	i;
-	int start;
-	char *file;
+	char	*file;
+	int		i;
+	int		start;
 
 	i = -1;
 	while (file_name[++i] != '\0')
