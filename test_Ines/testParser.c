@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+#pragma region texts
 
 #pragma region textures
 /** @brief gets string from test for the textures
@@ -24,7 +25,7 @@ char *get_string(char *test)
     i = 0;
     if (test[0] != ' ' && test[0] != '\t')
     {
-        printf("character not correct\n");
+        printf("Texture: Invalid character\n");
         return NULL;
     }
     length = ft_strlen(test);
@@ -32,15 +33,15 @@ char *get_string(char *test)
     {
         if (test[i] != ' ' && test[i] != '\t')
         {
-            printf("character not correct\n");
+            printf("Texture: Invalid character\n");
             return NULL;
         }
         i++;
     }
     if (i == length || test[i + 1] != '/')
     {
-        printf("wrong path\n");
-        return NULL;
+        printf("Texture: no path found\n");
+        return (NULL);
     }
     new = (char *)malloc(sizeof(char) * (length - i));
     i += 2;
@@ -92,13 +93,16 @@ int get_factors_rgb(int *i, char *test)
     while (test[*i] >= '0' && test[*i] <= '9')
         (*i)++;
     if (*i == init)
+    {
+        printf("Color: Character not valid\n");
         return (-1);
+    }
     final = *i;
     while (test[*i] != ',' && test[*i] != '\n' && test[*i] != '\0')
     {
         if (test[*i] != ' ' && test[*i] != '\t')
         {
-            printf("Error in color\n");
+            printf("Color: character not valid\n");
             return (-1);
         }
         (*i)++;
@@ -145,7 +149,7 @@ char *get_hexa(t_rgb color)
 
     if (color.r < 0 || color.r > 255 || color.g < 0 || color.g > 255 || color.b < 0 || color.b > 255 )
     {
-        printf("error!\nRGB Invalid\n");
+        printf("Color:error!\nRGB needs to be between 0 and 255\n");
         return (NULL);
     }
     hexa = ft_calloc(sizeof(char), 3); 
@@ -167,7 +171,7 @@ int get_colors(char *test, t_map *map)
 
     if (test[1] != ' ' && test[1] != '\t')
     {
-        printf("Error in color\n");
+        printf("Color: Character not valid\n");
         return (1);
     }
     i = 2;
@@ -178,7 +182,7 @@ int get_colors(char *test, t_map *map)
     color.b = get_factors_rgb(&i, test);
     if (color.r < 0 || color.g < 0 || color.b < 0)
     {
-        printf("Invalid value!\n");
+        printf("Color: Rgb not valid!\n");
         return 1;
     }
     str = get_hexa(color);
@@ -218,6 +222,240 @@ int save_value(char *test, t_map *map)
     }
     return 0;
 }
+#pragma endregion
+
+#pragma region map
+
+int check_characters(char *map_test)
+{
+    int i;
+    int a;
+
+    i = 0;
+    a = 0;
+    while(map_test[i] != '\0')
+    {
+        if (map_test[i] != '0' && map_test[i] != '1' && map_test[i] != ' ' && map_test[i] != 'N' && \
+        map_test[i] != 'S' && map_test[i] != 'E' && map_test[i] != 'W' && map_test[i] != '\n')
+        {            
+            printf("Map: Character not valid\n");
+            return (1);
+        }
+        if ((map_test[i] == 'N' || map_test[i] == 'S' || map_test[i] == 'E' || map_test[i] == 'W'))
+            a++;
+        i++;
+    }
+    if (a == 0)
+    {
+        printf("Map: There is no spot for the player\n");
+        return (1);
+    }
+    else if (a > 1)
+    {
+         printf("Map: More than one player\n");
+        return (1);
+    }
+    return (0);
+}
+
+int max_length_line(char *map_test)
+{
+    int i;
+    int a;
+    int max_length;
+
+    i = 0;
+    a = 0;
+    max_length = 0;
+    while (map_test[i] != '\0')
+    {
+        if (map_test[i] == '\n')
+        {
+            if (max_length < (i - a))
+                max_length = i - a;
+            a = i + 1;
+        }
+        i++;
+    }
+    if (max_length < i - a)
+        max_length = i - a;
+    return (max_length);
+}
+
+int number_of_lines(char *map_test)
+{
+    int i;
+    int line;
+
+    i = 0;
+    line = 0;
+    while (map_test[i] != '\0')
+    {
+        if (map_test[i] == '\n')
+            line++;
+        i++;
+    }
+    return (line + 1);
+}
+
+char *copy_map(char *map_test, int *j, int max_length)
+{
+    int i;
+    char *new_map;
+
+    i = 0;
+    new_map = malloc(sizeof(char) * (max_length + 1));
+    while (map_test[(*j)] != '\0' && map_test[(*j)] != '\n')
+    {
+        new_map[i] = map_test[(*j)];
+        i++; 
+        (*j)++;
+    }
+    while (i < max_length)
+    {
+        new_map[i] = ' ';
+        i++;
+    }
+    (*j)++;
+    new_map[i] = '\0';
+    return (new_map);
+}
+
+char **build_map(char *map_test, int lines, int max_length)
+{
+    char **map;
+    int i;
+    int j;
+    char *test;
+
+    i = 0;
+    map = malloc(sizeof(char *) * (lines + 1));
+    while (i < lines)
+    {
+        map[i] = malloc(sizeof(char) * (max_length + 1));
+        i++;
+    }
+    i = 0;
+    j = 0;
+    while (i < lines)
+    {   
+        test = copy_map(map_test, &j, max_length);
+        map[i] = ft_strdup(test);
+        free(test);
+        test = NULL;
+        i++;
+    }
+    map[i] = 0;
+    return (map);
+}
+
+int f_fill(char **map, int max_length, int lines, int x, int y)
+{
+    static int a;
+
+    if (a == 1)
+        return (1);
+    if (x < 0 || y < 0 || x > (max_length - 1) || y > (lines - 1))
+        return (0);
+    if (map[y][x] == 'F' || map[y][x] != '0')
+        return (0);
+    if (y == 0 || y == (lines - 1) || x == 0 || x == (max_length - 1))
+    {
+        printf("Map: ZeroTest :Invalid map.\n");
+        a = 1;
+        return (a);
+    }
+    map[y][x] = 'F';
+    a = 0;
+    if (map[y - 1][x] == ' ' || map[y][x - 1] == ' ' || map[y + 1][x] == ' ' || map[y][x + 1] == ' ' || \
+    map[y - 1][x] == '\0' || map[y][x - 1] == '\0' || map[y + 1][x] == '\0' || map[y][x + 1] == '\0')
+    {
+        printf("Map: Zero:Invalid map.\n");
+        a = 1;
+        return (a);
+    }
+
+    f_fill(map, max_length, lines, x - 1, y);
+    f_fill(map, max_length, lines, x + 1, y);
+    f_fill(map, max_length, lines, x, y - 1);
+    f_fill(map, max_length, lines, x, y + 1);
+    return (a);
+}
+
+int find_char(char **map, int *x, int *y, char find)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (map[j] != 0)
+    {
+        i = 0;
+        while (map[j][i] != '\0')
+        {
+            if (map[j][i] == find)
+            {
+                *x = i;
+                *y = j;
+                return (0);
+            }
+            i++;
+        }
+        j++;
+    }
+    return (1);
+}
+
+int floodfill(char **map, int max_length, int lines)
+{
+    int x;
+    int y;
+
+    x = 0;
+    y = 0;
+    while (!find_char(map, &x, &y, '0'))
+    {
+        if (f_fill(map, max_length, lines, x, y))
+            return (1);
+    }
+    x = 0;
+    y = 0;
+    if (find_char(map, &x, &y, 'N'))
+        if (find_char(map, &x, &y, 'S'))
+            if (find_char(map, &x, &y, 'W'))
+                find_char(map, &x, &y, 'E');
+    if (map[y - 1][x] == ' ' || map[y][x - 1] == ' ' || map[y + 1][x] == ' ' || map[y][x + 1] == ' ' || 
+    map[y - 1][x] == '\0' || map[y][x - 1] == '\0' || map[y + 1][x] == '\0' || map[y][x + 1] == '\0')
+    {
+        printf("Map: Player; Invalid map.\n");
+        return (1);
+    }
+    return (0);
+}
+
+int parse_map(char *map_test, t_map *map)
+{
+    int max_length;
+    int lines;
+
+    if (check_characters(map_test))
+        return (1);
+    max_length = max_length_line(map_test);
+    lines = number_of_lines(map_test);
+    map->worldmap = build_map(map_test, lines, max_length);  
+    if (floodfill(map->worldmap, max_length, lines))
+       return (1);
+    int i = 0;
+    while (map->worldmap[i] != 0)
+    {
+        printf("%d, %s\n", i, map->worldmap[i]);
+        i++;
+    }
+    return (0);
+}
+
+#pragma endregion
 
 int main(int argc, char *argv[], char *envp[])
 {
@@ -237,21 +475,72 @@ int main(int argc, char *argv[], char *envp[])
     test = ft_strtrim(test, "\t");
     if (save_value(test, map))
         return 1;
-    while (test)
+
+    while (!map->e_texture || !map->w_texture || !map->s_texture \
+    || !map->n_texture || !map->color_c || !map->color_f)
     {
         test = get_next_line(fd);
         if (!test)
-            break ;
+        {
+            printf("There is no map!\n");
+            return (1);
+        }
         test = ft_strtrim(test, " ");
         test = ft_strtrim(test, "\t");
         if (save_value(test, map))
             return (1);
         free(test);
     }
+
+    test = NULL;
+    char *map_test;
+    int i = 0;
+    int a = 0;
+    while (!test)
+    {
+        test = get_next_line(fd);
+        if (test[i] == ' ' || test[i] == '\t' || test[i] == '\n')
+        {
+            if (test[0] == '\n')
+            {
+                free(test);
+                test = NULL;
+            }
+            else
+            {
+                while (test[i] != '\n')
+                {
+                    if (test[i] == ' ' || test[i] == '\t')
+                        a++;
+                    i++;
+                }
+                if (a == ft_strlen(test) - 1)
+                {
+                    free(test);
+                    test = NULL;
+                }
+            }
+        }
+    }
+    
+    i = 0;
+    map_test = ft_strdup(test);
+    while (test)
+    {
+        free(test);
+        test = NULL;
+        test = get_next_line(fd);
+        map_test = ft_strjoin(map_test, test);
+    }
+   // printf("%s\n", map_test);
+   ft_strtrim(map_test, "\n");
+    parse_map(map_test, map);
+    
+/*
     printf("\n\n%s\n", map->n_texture);
     printf("%s\n", map->s_texture);
     printf("%s\n", map->w_texture);
     printf("%s\n", map->e_texture);
     printf("%s\n", map->color_c);
-    printf("%s\n", map->color_f);
+    printf("%s\n", map->color_f);*/
 }
