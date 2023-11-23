@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:01:09 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 22:27:44 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:45:43 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,25 @@ int	check_file(char *file)
 
 int	check_file_extension(char *file_name)
 {
-	int	i;
+	char	*file;
+	int		i;
+	int		start;
 
+	i = -1;
+	while (file_name[++i] != '\0')
+		if (file_name[i] == '/')
+			start = i;
+	file = ft_substr(file_name, start + 1, ft_strlen(file_name));
+	if (ft_strlen(file) < 5)
+	{
+		printf("Error!\nFile extension not valid...\n");
+		return (1);
+	}
 	i = 0;
-	while (file_name[i])
+	while (file[i])
 		i++;
-	if (file_name[i - 1] != 'b' || file_name[i - 2] != 'u' || \
-	file_name[i - 3] != 'c' || file_name[i - 4] != '.')
+	if (file[i - 1] != 'b' || file[i - 2] != 'u' || \
+	file[i - 3] != 'c' || file[i - 4] != '.')
 	{
 		printf("Error!\nFile extension not valid...\n");
 		return (1);
