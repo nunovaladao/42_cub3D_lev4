@@ -1,3 +1,4 @@
+
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -202,7 +203,6 @@ int get_colors(char *test, t_map *map)
 * */
 int save_value(char *test, t_map *map)
 {
-    int length;
     int i;
 
     i = 0;
@@ -212,10 +212,9 @@ int save_value(char *test, t_map *map)
         return (get_colors(test, map));
     else if(ft_strncmp("\n", test, 1))
     {
-        length = ft_strlen(test);
         while((test[i] == ' ' || test[i] == '\t') && test[i] != '\n')
             i++;
-        if (i == length)
+        if (i == ft_strlen(test))
             return (0);
         printf("Error!\nCharacters not known\n");
         return (1);
@@ -351,10 +350,10 @@ char **build_map(char *map_test, int lines, int max_length)
 
 int f_fill(char **map, int max_length, int lines, int x, int y)
 {
-    static int a;
+    //static int a;
 
-    if (a == 1)
-        return (1);
+    //if (a == 1)
+      //  return (1);
     if (x < 0 || y < 0 || x > (max_length - 1) || y > (lines - 1))
         return (0);
     if (map[y][x] == 'F' || map[y][x] != '0')
@@ -362,24 +361,24 @@ int f_fill(char **map, int max_length, int lines, int x, int y)
     if (y == 0 || y == (lines - 1) || x == 0 || x == (max_length - 1))
     {
         printf("Map: ZeroTest :Invalid map.\n");
-        a = 1;
-        return (a);
+        //a = 1;
+        return (1);
     }
     map[y][x] = 'F';
-    a = 0;
+   // a = 0;
     if (map[y - 1][x] == ' ' || map[y][x - 1] == ' ' || map[y + 1][x] == ' ' || map[y][x + 1] == ' ' || \
     map[y - 1][x] == '\0' || map[y][x - 1] == '\0' || map[y + 1][x] == '\0' || map[y][x + 1] == '\0')
     {
         printf("Map: Zero:Invalid map.\n");
-        a = 1;
-        return (a);
+       // a = 1;
+        return (1);
     }
 
     f_fill(map, max_length, lines, x - 1, y);
     f_fill(map, max_length, lines, x + 1, y);
     f_fill(map, max_length, lines, x, y - 1);
     f_fill(map, max_length, lines, x, y + 1);
-    return (a);
+    return (0);
 }
 
 int find_char(char **map, int *x, int *y, char find)
@@ -425,10 +424,15 @@ int floodfill(char **map, int max_length, int lines)
         if (find_char(map, &x, &y, 'S'))
             if (find_char(map, &x, &y, 'W'))
                 find_char(map, &x, &y, 'E');
-    if (map[y - 1][x] == ' ' || map[y][x - 1] == ' ' || map[y + 1][x] == ' ' || map[y][x + 1] == ' ' || 
+    if (y == 0 || x == 0 || y == (lines - 1) || x == (max_length - 1))
+    {
+        printf("Map: Player: Invalid map.\n");
+        return (1);
+    }
+    else if (map[y - 1][x] == ' ' || map[y][x - 1] == ' ' || map[y + 1][x] == ' ' || map[y][x + 1] == ' ' || 
     map[y - 1][x] == '\0' || map[y][x - 1] == '\0' || map[y + 1][x] == '\0' || map[y][x + 1] == '\0')
     {
-        printf("Map: Player; Invalid map.\n");
+        printf("Map: Player: Invalid map.\n");
         return (1);
     }
     return (0);
@@ -495,7 +499,6 @@ int main(int argc, char *argv[], char *envp[])
     test = NULL;
     char *map_test;
     int i = 0;
-    int a = 0;
     while (!test)
     {
         test = get_next_line(fd);
@@ -506,20 +509,23 @@ int main(int argc, char *argv[], char *envp[])
                 free(test);
                 test = NULL;
             }
-            else
-            {
-                while (test[i] != '\n')
-                {
-                    if (test[i] == ' ' || test[i] == '\t')
-                        a++;
-                    i++;
-                }
-                if (a == ft_strlen(test) - 1)
-                {
-                    free(test);
-                    test = NULL;
-                }
-            }
+			else
+			{
+            	while (test[i] == ' ' || test[i] == '\t')
+                	i++;
+            	if (i == ft_strlen(test) - 1 && test[i - 1] == '\n')
+            	{
+					i = 0;
+                	free(test);
+                	test = NULL;
+            	}
+				else if (i == ft_strlen(test))
+				{
+					i = 0;
+                	free(test);
+                	test = NULL;
+				}
+			}
         }
     }
     
@@ -533,8 +539,9 @@ int main(int argc, char *argv[], char *envp[])
         map_test = ft_strjoin(map_test, test);
     }
    // printf("%s\n", map_test);
-   ft_strtrim(map_test, "\n");
-    parse_map(map_test, map);
+   	ft_strtrim(map_test, "\n");
+    if (parse_map(map_test, map))
+        return (1);
     
 /*
     printf("\n\n%s\n", map->n_texture);
@@ -543,4 +550,5 @@ int main(int argc, char *argv[], char *envp[])
     printf("%s\n", map->e_texture);
     printf("%s\n", map->color_c);
     printf("%s\n", map->color_f);*/
+    return (0);
 }

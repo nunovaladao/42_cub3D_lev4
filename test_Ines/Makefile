@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
+#    By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 17:52:53 by nsoares-          #+#    #+#              #
-#    Updated: 2023/11/12 23:41:36 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/11/23 21:13:16 by inesalves        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-CC = cc -g
+CC = cc -g -Wall -Werror -Wextra
 RM = rm -rf
 LIBFT = ./libft/libft.a
 
@@ -20,7 +20,8 @@ LIBFT = ./libft/libft.a
 # _________SOURCES____________
 
 SOURCE_FILES = gnl/get_next_line.c gnl/get_next_line_utils.c \
-				testParser.c \
+				parser/parser_init.c parser/textures.c parser/colors.c parser/map_part1.c \
+				parser/map_floodfill.c parser/map_part2.c parser/free_error.c\
 				
 
 OBJS_FILES = $(SOURCE_FILES:.c=.o)

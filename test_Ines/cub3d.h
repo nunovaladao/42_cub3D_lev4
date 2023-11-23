@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 21:53:05 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:57:03 by inesalves        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct s_rgb
 	int		g;
 	int		b;
 }	t_rgb;
+
+typedef struct s_size_map
+{
+	int		lines;
+	int		max_length;
+}	t_size_map;
 
 typedef struct s_texture
 {
@@ -113,8 +119,8 @@ typedef struct s_map
 	char	*s_texture;
 	char	*w_texture;
 	char	*e_texture;
-	char 	*color_c;
-	char 	*color_f;
+	char 	*color_c; //update ines
+	char 	*color_f; //update ines
 	t_data	*data;
 }				t_map;
 
@@ -150,4 +156,41 @@ void	calc_wall_pixel(t_data *d);
 // Moves
 void	update_moves(t_data *data, double rot);
 
+/*PARSER*/
+
+/*Parser_init*/
+int	check_text(char *test, t_map *map, int fd);
+int	parse_gnl(int fd, t_map *map);
+
+/*textures*/
+int	save_value(char *test, t_map *map);
+int	get_textures(char *test, t_map *map);
+int	check_string(char *test, int *i);
+
+/*Colors*/
+int	get_factors_rgb(int *i, char *test);
+void	get_hexa_parts(int *i, char **hexa, int color);
+char	*get_hexa(t_rgb color);
+int get_colors(char *test, t_map *map);
+int	clear_spaces(int *i, char *test, int a);
+
+/*Map_part1*/
+int	start_map(char *test, int fd, t_map *map);
+int check_characters(char *map_test);
+char **build_map(char *map_test, int lines, int max_length);
+int parse_map(char *map_test, t_map *map);
+
+/*Map_part2*/
+int max_length_line(char *map_test);
+int number_of_lines(char *map_test);
+char *copy_map(char *map_test, int *j, int max_length);
+
+/*map_floodfill*/
+int	f_fill(char **map, t_size_map ms, int x, int y);
+int find_char(char **map, int *x, int *y, char find);
+int	floodfill(char **map, t_size_map s_map);
+
+/*Error*/
+void	free_map(t_map *map);
+void	free_str(char **str);
 #endif
