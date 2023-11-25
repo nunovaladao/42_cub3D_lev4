@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:48:23 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/25 18:46:04 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/25 21:24:40 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,27 @@ void	free_map(t_map *map)
 	free(map);
 }
 
-char	*cleaning_func_part2(char *map_test, char *test)
+char	*cleaning_func_part2(char *test, int fd)
 {
 	char	*aux;
+	char	*map_test;
 
-	aux = ft_strjoin(map_test, test);
-	free(map_test);
-	map_test = NULL;
-	map_test = ft_strdup(aux);
-	free(aux);
-	aux = NULL;
+	map_test = ft_strdup(test);
+	while (test)
+	{
+		free(test);
+		test = NULL;
+		test = get_next_line(fd);
+		if (test)
+		{
+			aux = ft_strjoin(map_test, test);
+			free(map_test);
+			map_test = NULL;
+			map_test = ft_strdup(aux);
+			free(aux);
+			aux = NULL;
+		}
+	}
 	return (map_test);
 }
 

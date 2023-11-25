@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:40:19 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/25 18:34:25 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/25 21:41:01 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,20 @@ int	parse_gnl(int fd, t_map *map)
 	map->f_color = get_base_10(map->color_f);
 	printf("%d\n", map->c_color);
 	printf("%d\n", map->f_color);
+	int i = 0;
+    while (map->worldmap[i] != 0)
+    {
+        printf("%d, %s\n", i, map->worldmap[i]);
+        i++;
+    }
 	return (0);
 }
+/*	int i = 0;
+    while (map->worldmap[i] != 0)
+    {
+        printf("%d, %s\n", i, map->worldmap[i]);
+        i++;
+    }*/
 
 int	start_parser(char *argv[])
 {

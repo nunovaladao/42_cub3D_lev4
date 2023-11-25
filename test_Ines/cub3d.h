@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/25 18:45:20 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/25 21:27:39 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ int	floodfill(char **map, t_size_map s_map);
 
 /*Error*/
 void	free_map(t_map *map);
-char	*cleaning_func_part2(char *map_test, char *test);
+char	*cleaning_func_part2(char *test, int fd);
 char	*cleaning_func_part3(char *map_test);
 int	final_check_player(int a);
 
