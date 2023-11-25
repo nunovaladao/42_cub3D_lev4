@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+        */
+/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/23 20:57:03 by inesalves        ###   ########.fr       */
+/*   Updated: 2023/11/25 18:45:20 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ typedef struct s_map
 	char	*e_texture;
 	char 	*color_c; //update ines
 	char 	*color_f; //update ines
+	int		c_color;
+	int		f_color;
 	t_data	*data;
 }				t_map;
 
@@ -192,5 +194,13 @@ int	floodfill(char **map, t_size_map s_map);
 
 /*Error*/
 void	free_map(t_map *map);
-void	free_str(char **str);
+char	*cleaning_func_part2(char *map_test, char *test);
+char	*cleaning_func_part3(char *map_test);
+int	final_check_player(int a);
+
+/*parser_part2*/
+int get_base_10(char *color);
+char	*test_spaces(char *test);
+char	*cleaning_func(char *test);
+
 #endif

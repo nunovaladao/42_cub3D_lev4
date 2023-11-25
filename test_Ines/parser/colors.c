@@ -16,6 +16,7 @@ int	get_factors_rgb(int *i, char *test)
 {
 	int		init;
 	int		final;
+	int		number;
 	char	*str;
 
 	init = *i;
@@ -26,10 +27,11 @@ int	get_factors_rgb(int *i, char *test)
 	final = *i;
 	if (clear_spaces(i, test, 1) < 0)
 		return (-1);
-	str = (char *)malloc(sizeof(char) * (final - init + 1));
-	str = &test[init];
-	str[final - init] = '\0';
-	return (ft_atoi(str));
+	str = ft_substr(test, init, final - init);
+	number = ft_atoi(str);
+	free(str);
+	str = NULL;
+	return (number);
 }
 
 /** @brief with a base transform rgb to hexa
@@ -41,8 +43,7 @@ void	get_hexa_parts(int *i, char **hexa, int color)
 	int		j;
 
 	j = 0;
-	base = (char *)malloc(sizeof(char) * 17);
-	base = "0123456789ABCDEF";
+	base = ft_strdup("0123456789ABCDEF");
 	str = malloc(sizeof(char) * 3);
 	str[j] = base[color / 16];
 	j++;
@@ -57,6 +58,7 @@ void	get_hexa_parts(int *i, char **hexa, int color)
 		(*i)++;
 	}
 	free(str);
+	free(base);
 }
 
 /** @brief returns a string of an hexa
@@ -72,7 +74,7 @@ char	*get_hexa(t_rgb color)
 		printf("Color:error!\nRGB needs to be between 0 and 255\n");
 		return (NULL);
 	}
-	hexa = ft_calloc(sizeof(char), 3);
+	hexa = ft_calloc(sizeof(char), 9);
 	i = 0;
 	get_hexa_parts(&i, &hexa, color.r);
 	get_hexa_parts(&i, &hexa, color.g);

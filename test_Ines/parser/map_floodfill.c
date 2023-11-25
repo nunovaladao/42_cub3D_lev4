@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_floodfill.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+        */
+/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:29:20 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/23 21:10:01 by inesalves        ###   ########.fr       */
+/*   Updated: 2023/11/25 18:45:58 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,14 @@ int	f_fill(char **map, t_size_map ms, int x, int y)
 		printf("Error!\nMap: Unclosed map.\n");
 		return (1);
 	}
-	f_fill(map, ms, x - 1, y);
-	f_fill(map, ms, x + 1, y);
-	f_fill(map, ms, x, y - 1);
-	f_fill(map, ms, x, y + 1);
+	if (f_fill(map, ms, x - 1, y))
+		return (1);
+	if (f_fill(map, ms, x + 1, y))
+		return (1);
+	if (f_fill(map, ms, x, y - 1))
+		return (1);
+	if (f_fill(map, ms, x, y + 1))
+		return (1);
 	return (0);
 }
 

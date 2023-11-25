@@ -84,11 +84,9 @@ int	get_textures(char *test, t_map *map)
 * */
 int	save_value(char *test, t_map *map)
 {
-	int	i;	
+	int	i;
 
 	i = 0;
-	test = ft_strtrim(test, " ");
-	test = ft_strtrim(test, "\t");
 	if (!ft_strncmp(test, "NO", 2) || !ft_strncmp(test, "SO", 2) \
 	|| !ft_strncmp(test, "EA", 2) || !ft_strncmp(test, "WE", 2))
 		return (get_textures(test, map));

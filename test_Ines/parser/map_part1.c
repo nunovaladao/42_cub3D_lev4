@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_part1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+        */
+/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:21:42 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/23 21:21:00 by inesalves        ###   ########.fr       */
+/*   Updated: 2023/11/25 18:45:26 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,8 @@ int	check_characters(char *map_test)
 			a++;
 		i++;
 	}
-	if (a == 0 || a > 1)
-	{
-		if (a == 0)
-			printf("Map: There is no spot for the player\n");
-		else
-			printf("Map: More than one player\n");
+	if (final_check_player(a))
 		return (1);
-	}
 	return (0);
 }
 
@@ -69,11 +63,6 @@ char	**build_map(char *map_test, int lines, int max_length)
 
 	i = 0;
 	map = malloc(sizeof(char *) * (lines + 1));
-	while (i < lines)
-	{
-		map[i] = malloc(sizeof(char) * (max_length + 1));
-		i++;
-	}
 	i = 0;
 	j = 0;
 	while (i < lines)
@@ -97,37 +86,38 @@ int	parse_map(char *map_test, t_map *map)
 	s_map.max_length = max_length_line(map_test);
 	s_map.lines = number_of_lines(map_test);
 	map->worldmap = build_map(map_test, s_map.lines, s_map.max_length);
-	free(map_test);
 	if (floodfill(map->worldmap, s_map))
 		return (1);
-	int i = 0;
-    while (map->worldmap[i] != 0)
-    {
-        printf("%d, %s\n", i, map->worldmap[i]);
-        i++;
-    }
 	return (0);
 }
 
 int	start_map(char *test, int fd, t_map *map)
 {
 	char	*map_test;
+	int		i;
 
+	i = 0;
 	map_test = ft_strdup(test);
 	while (test)
 	{
 		free(test);
 		test = NULL;
 		test = get_next_line(fd);
-		map_test = ft_strjoin(map_test, test);
+		if (test)
+			cleaning_func_part2(map_test, test);
 	}
-	ft_strtrim(map_test, "\n");
 	if (parse_map(map_test, map))
+	{
+		free(map_test);
+		map_test = NULL;
 		return (1);
+	}
+	free(map_test);
+	map_test = NULL;
 	return (0);
 }
 
-/* int i = 0;
+/*	int i = 0;
     while (map->worldmap[i] != 0)
     {
         printf("%d, %s\n", i, map->worldmap[i]);

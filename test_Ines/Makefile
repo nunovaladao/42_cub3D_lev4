@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+         #
+#    By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 17:52:53 by nsoares-          #+#    #+#              #
-#    Updated: 2023/11/23 21:13:16 by inesalves        ###   ########.fr        #
+#    Updated: 2023/11/25 18:23:16 by idias-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT = ./libft/libft.a
 
 SOURCE_FILES = gnl/get_next_line.c gnl/get_next_line_utils.c \
 				parser/parser_init.c parser/textures.c parser/colors.c parser/map_part1.c \
-				parser/map_floodfill.c parser/map_part2.c parser/free_error.c\
+				parser/map_floodfill.c parser/map_part2.c parser/free_error.c parser/parser_part2.c\
 				
 
 OBJS_FILES = $(SOURCE_FILES:.c=.o)
