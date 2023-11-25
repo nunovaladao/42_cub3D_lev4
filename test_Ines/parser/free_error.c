@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   free_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:48:23 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/25 21:24:40 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/25 22:57:21 by inesalves        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+/**
+ * @brief frees a string of strings
+ * @param map -> struct
+ */
 void	free_map_strings(t_map *map)
 {
 	int	i;
@@ -25,6 +29,10 @@ void	free_map_strings(t_map *map)
 	free(map->worldmap);
 }
 
+/**
+ * @brief free all map
+ * @param map 
+ */
 void	free_map(t_map *map)
 {
 	if (map->e_texture)
@@ -44,6 +52,12 @@ void	free_map(t_map *map)
 	free(map);
 }
 
+/**
+ * @brief creates the map of string
+ * @param test -> gnl string
+ * @param fd -> file descriptor
+ * @return char* -> map as string
+ */
 char	*cleaning_func_part2(char *test, int fd)
 {
 	char	*aux;
@@ -68,6 +82,11 @@ char	*cleaning_func_part2(char *test, int fd)
 	return (map_test);
 }
 
+/**
+ * @brief clears newlines of the map string
+ * @param map_test 
+ * @return char* 
+ */
 char	*cleaning_func_part3(char *map_test)
 {
 	char	*aux;
@@ -86,9 +105,9 @@ int	final_check_player(int a)
 	if (a == 0 || a > 1)
 	{
 		if (a == 0)
-			printf("Map: There is no spot for the player\n");
+			printf("Error!\nMap: There is no player\n");
 		else
-			printf("Map: More than one player\n");
+			printf("Error!\nMap: More than one player\n");
 		return (1);
 	}
 	return (0);

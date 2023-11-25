@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_part1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:21:42 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/25 21:35:06 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/25 23:01:46 by inesalves        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	check_characters(char *map_test)
 	{
 		if (valid_characters(map_test[i], 0))
 		{
-			printf("%c\n", map_test[i]);
 			printf("Error!\nMap: Character not valid\n");
 			return (1);
 		}
@@ -109,10 +108,3 @@ int	start_map(char *test, int fd, t_map *map)
 	map_test = NULL;
 	return (0);
 }
-
-/*	int i = 0;
-    while (map->worldmap[i] != 0)
-    {
-        printf("%d, %s\n", i, map->worldmap[i]);
-        i++;
-    }*/

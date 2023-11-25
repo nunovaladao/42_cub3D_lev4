@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   map_floodfill.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:29:20 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/25 18:45:58 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/25 23:00:49 by inesalves        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+/**
+ * @brief checks invalid characters surrounding 0
+ * @param map 
+ * @param x ->position
+ * @param y -> position
+ * @return int -> 0 if ok.
+ */
 int	check_if_wall(char **map, int x, int y)
 {
 	if (map[y - 1][x] == ' ' || map[y][x - 1] == ' ')
@@ -25,6 +32,14 @@ int	check_if_wall(char **map, int x, int y)
 	return (0);
 }
 
+/**
+ * @brief inserts and F instead of 0
+ * @param map 
+ * @param ms 
+ * @param x 
+ * @param y 
+ * @return int 
+ */
 int	f_fill(char **map, t_size_map ms, int x, int y)
 {
 	if (x < 0 || y < 0 || x > (ms.max_length - 1) || y > (ms.lines - 1))
@@ -39,7 +54,7 @@ int	f_fill(char **map, t_size_map ms, int x, int y)
 	map[y][x] = 'F';
 	if (check_if_wall(map, x, y))
 	{
-		printf("Error!\nMap: Unclosed map.\n");
+		printf("Error!\nMap: Invalid.\n");
 		return (1);
 	}
 	if (f_fill(map, ms, x - 1, y))
@@ -53,6 +68,14 @@ int	f_fill(char **map, t_size_map ms, int x, int y)
 	return (0);
 }
 
+/**
+ * @brief finds a char in map character
+ * @param map 
+ * @param x 
+ * @param y 
+ * @param find -> character to find
+ * @return int 
+ */
 int	find_char(char **map, int *x, int *y, char find)
 {
 	int	i;
@@ -78,6 +101,14 @@ int	find_char(char **map, int *x, int *y, char find)
 	return (1);
 }
 
+/**
+ * @brief checks that player isn't outside the map
+ * @param map 
+ * @param ms 
+ * @param x 
+ * @param y 
+ * @return int 
+ */
 int	final_check_character(char **map, t_size_map ms, int x, int y)
 {
 	x = 0;
@@ -93,7 +124,7 @@ int	final_check_character(char **map, t_size_map ms, int x, int y)
 	}
 	else if (check_if_wall(map, x, y))
 	{
-		printf("Map: Player: Invalid map.\n");
+		printf("Error!\nMap: Player: Has to be inside the map.\n");
 		return (1);
 	}
 	return (0);

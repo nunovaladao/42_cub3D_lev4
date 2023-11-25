@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:01:07 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/25 18:48:04 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/25 22:34:02 by inesalves        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int	check_string(char *test, int *i)
 {
 	if (test[0] != ' ' && test[0] != '\t')
 	{
-		printf("Texture: Invalid character\n");
+		printf("Error!\nTexture: Invalid character\n");
 		return (1);
 	}
 	while (test[*i] != '.' && test[*i] != '\0')
 	{
 		if (test[*i] != ' ' && test[*i] != '\t')
 		{
-			printf("Texture: Invalid character\n");
+			printf("Error!\nTexture: Invalid character\n");
 			return (1);
 		}
 		(*i)++;
@@ -47,7 +47,7 @@ char	*get_string(char *test)
 		return (NULL);
 	if (i == (int)ft_strlen(test) || test[i + 1] != '/')
 	{
-		printf("Texture: no path found\n");
+		printf("Error!\nTexture: no path found\n");
 		return (NULL);
 	}
 	j = i + 2;
@@ -98,7 +98,7 @@ int	save_value(char *test, t_map *map)
 			i++;
 		if (i == (int)ft_strlen(test))
 			return (0);
-		printf("Error!\nCharacters not known\n");
+		printf("Error!\nTextures and colors incomplete!\n");
 		return (1);
 	}
 	return (0);

@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: inesalves <inesalves@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:02:34 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/25 21:39:29 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/25 22:55:17 by inesalves        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
+ 
+ /**
+  * @brief Get the factors rgb object
+  * e, g and b factors in colors
+  * @param i -> index in string
+  * @param test 
+  * @return int -> returns in test
+  */
 int	get_factors_rgb(int *i, char *test)
 {
 	int		init;
@@ -71,7 +78,7 @@ char	*get_hexa(t_rgb color)
 	if (color.r < 0 || color.r > 255 || color.g < 0 || \
 	color.g > 255 || color.b < 0 || color.b > 255)
 	{
-		printf("Color:error!\nRGB needs to be between 0 and 255\n");
+		printf("Error!\nRGB needs to be between 0 and 255\n");
 		return (NULL);
 	}
 	hexa = ft_calloc(sizeof(char), 9);
@@ -83,6 +90,13 @@ char	*get_hexa(t_rgb color)
 	return (hexa);
 }
 
+/**
+ * @brief clears the spaces or tabs
+ * @param i 
+ * @param test 
+ * @param a 
+ * @return int 
+ */
 int	clear_spaces(int *i, char *test, int a)
 {
 	if (a == 0)
@@ -90,7 +104,7 @@ int	clear_spaces(int *i, char *test, int a)
 		*i = 2;
 		if (test[1] != ' ' && test[1] != '\t')
 		{
-			printf("Color: Character not valid\n");
+			printf("Error\nColor: Character not valid\n");
 			return (1);
 		}
 		while ((test[*i] == ' ' || test[*i] == '\t') && \
@@ -125,7 +139,7 @@ int	get_colors(char *test, t_map *map)
 	color.b = get_factors_rgb(&i, test);
 	if (color.r < 0 || color.g < 0 || color.b < 0)
 	{
-		printf("Color: Rgb not valid!\n");
+		printf("Error!\nColor: Rgb not valid!\n");
 		return (1);
 	}
 	str = get_hexa(color);
