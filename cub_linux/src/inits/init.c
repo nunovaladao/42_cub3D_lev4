@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/28 14:52:07 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:11:43 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ void	init_map(t_map *map, t_data *data)
 {
 	map->wall_x = 0.0;
 	map->fd = 0;
-	map->nr_rows = 0;
-	map->worldmap = NULL;
+	map->worldmap = 0;
 	map->map_file = NULL;
-	map->line = NULL;
-	map->n_texture = "textures/N1.xpm";
-	map->s_texture = "textures/S1.xpm";
-	map->w_texture = "textures/W1.xpm";
-	map->e_texture = "textures/E1.xpm";
+	map->n_texture = NULL;
+	map->s_texture = NULL;
+	map->w_texture = NULL;
+	map->e_texture = NULL;
 	map->data = data;
 }
 

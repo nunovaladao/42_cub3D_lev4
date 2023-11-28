@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 22:52:49 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/10 00:18:51 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:12:47 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	draw_floor(t_mlx *m)
 		y = SCREENHEIGHT / 2;
 		while (y < SCREENHEIGHT)
 		{
-			my_mlx_pixel_put(m, x, y, 0x000000);
+			my_mlx_pixel_put(m, x, y, m->data->map->f_color);
 			y++;
 		}
 		x++;
@@ -55,7 +55,7 @@ void	ceiling(t_mlx *m)
 		y = 0;
 		while (y < SCREENHEIGHT / 2)
 		{
-			my_mlx_pixel_put(m, x, y, 0x808080);
+			my_mlx_pixel_put(m, x, y, m->data->map->c_color);
 			y++;
 		}
 		x++;

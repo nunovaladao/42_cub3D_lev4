@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:48:39 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/28 14:44:39 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:31:16 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 	t_mlx	mlx;
-	t_map	map;
+	t_map	*map;
 
-	if (check_args(ac, av) == 1)
+	map = (t_map *)malloc(sizeof(t_map));
+	init_all(&mlx, &data, map);
+	if (check_args(ac, av, map) == 1)
 		exit(1);
-	init_all(&mlx, &data, &map);
-	// check / read map
-	map.map_file = av[1];
-	check_map(&map);
+	if (start_parser(map))
+		return (1);
 	open_window(&mlx);
 	init_textures(&data);
 	mlx_hook(mlx.mlx_win, 2, 1L << 0, keyboard_hook, &mlx);
