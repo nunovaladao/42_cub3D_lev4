@@ -6,12 +6,24 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:57:35 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/28 14:55:11 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/28 23:10:09 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
+/**
+ * @brief Updates the player's position and orientation based on 
+ * rotation and movement.
+ *
+ * This function updates the player's direction, plane, and position 
+ * based on the specified rotation angle and checks for collisions with 
+ * walls in the game. The player's position is adjusted accordingly, 
+ * ensuring that it does not intersect with walls.
+ *
+ * @param data A pointer to the game data structure.
+ * @param rot The rotation angle.
+ */
 void	update_moves(t_data *data, double rot)
 {
 	double	olddir_x;
