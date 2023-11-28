@@ -6,11 +6,15 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:01:07 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/28 16:10:43 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:47:05 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
+
+
+///FALTA VERIFICAR QUE A EXTENSAO DAS TEXTURAS E XPM
+
 
 int	check_string(char *test, int *i)
 {
@@ -19,15 +23,8 @@ int	check_string(char *test, int *i)
 		printf("Error!\nTexture: Invalid character\n");
 		return (1);
 	}
-	while (test[*i] != '.' && test[*i] != '\0')
-	{
-		if (test[*i] != ' ' && test[*i] != '\t')
-		{
-			printf("Error!\nTexture: Invalid character\n");
-			return (1);
-		}
+	while ((test[*i] == ' ' || test[*i] == '\t') && test[*i] != '\0')
 		(*i)++;
-	}
 	return (0);
 }
 
@@ -41,20 +38,24 @@ char	*get_string(char *test)
 	int		i;
 	int		j;
 	char	*new;
+	int		fd;
 
 	i = 0;
 	if (check_string(test, &i))
 		return (NULL);
-	if (i == (int)ft_strlen(test) || test[i + 1] != '/')
-	{
-		printf("Error!\nTexture: no path found\n");
-		return (NULL);
-	}
 	j = i + 2;
 	while (test[j] != ' ' && test[j] != '\t' \
 	&& test[j] != '\n' && test[j] != '\0')
 		j++;
-	new = ft_substr(test, i + 2, j - i - 2);
+	new = ft_substr(test, i, j - i);
+	fd = open(new, O_RDONLY);
+	if (fd < 0)
+	{
+		printf("Error!\nTexture: no path found\n");
+		close(fd);
+		return (NULL);
+	}
+	close(fd);
 	return (new);
 }
 

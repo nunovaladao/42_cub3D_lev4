@@ -1,12 +1,12 @@
-    NO      ./textures/ola.xpm     
-SO     ./textures/door.xpm
+    NO      small.cub
+SO     textures/door.xpm
 
 
 F	26,56,130  
 
-   EA ./textures/mini_wall.xpm   
+   EA textures/mini_wall.xpm   
 
-WE ./textures/file.xpm  
+WE textures/file.xpm  
 
    C 120,56,130
 
