@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/10 00:14:28 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:52:07 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	init_other_data(t_data *data, t_mlx *m, struct s_map *map)
 	data->dex = 0.0;
 	data->dey = 0.0;
 	data->rot = 0.0;
-	data->totalrots = 0.0;
 	data->mlx = m;
 	data->map = map;
 	data->text = malloc(4 * sizeof(t_texture));

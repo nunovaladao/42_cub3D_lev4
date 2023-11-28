@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:57:35 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 23:20:00 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:55:11 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	update_moves(t_data *data, double rot)
 	double	oldplane_x;
 
 	olddir_x = data->dir_x;
-	data->totalrots += rot;
 	data->dir_x = data->dir_x * cos(rot) - data->dir_y * sin(rot);
 	data->dir_y = olddir_x * sin(rot) + data->dir_y * cos(rot);
 	oldplane_x = data->plane_x;

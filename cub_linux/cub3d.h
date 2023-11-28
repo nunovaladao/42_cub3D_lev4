@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/09 21:53:05 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:45:37 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ typedef struct s_data
 	double			dey;
 	double			dex;
 	double			rot;
-	double			totalrots;
 	t_mlx			*mlx;
 	struct s_map	*map;
 	t_texture		*text;
@@ -101,7 +100,7 @@ typedef struct s_data
 
 typedef struct s_map
 {
-	char	**worldmap; // armazenar o mapa
+	char	**worldmap;
 	double	wall_x;
 	double	step;
 	double	tex_pos;
