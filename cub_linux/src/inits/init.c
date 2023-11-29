@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:22:54 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/28 16:11:43 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:32:19 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	init_map(t_map *map, t_data *data)
 	map->s_texture = NULL;
 	map->w_texture = NULL;
 	map->e_texture = NULL;
+	map->color_c = NULL;
+	map->color_f = NULL;
 	map->data = data;
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+         #
+#    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 17:52:53 by nsoares-          #+#    #+#              #
-#    Updated: 2023/11/28 16:13:56 by idias-al         ###   ########.fr        #
+#    Updated: 2023/11/29 12:10:59 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SOURCE_FILES = gnl/get_next_line.c gnl/get_next_line_utils.c \
 				src/parser/file_access.c src/parser/check_args.c src/draw_map/draw.c \
 				src/draw_map/render.c src/draw_map/render_utils.c \
 				src/parser/parser_init.c src/parser/textures.c src/parser/colors.c src/parser/map_part1.c \
-				src/parser/map_floodfill.c src/parser/map_part2.c src/parser/free_error.c src/parser/parser_part2.c\
+				src/parser/map_floodfill.c src/parser/map_part2.c src/parser/free_error.c src/parser/parser_part2.c \
+				src/parser/set_directions.c
 				
 
 OBJS_FILES = $(SOURCE_FILES:.c=.o)

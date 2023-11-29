@@ -6,11 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:01:09 by nsoares-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/11/29 11:23:42 by idias-al         ###   ########.fr       */
-=======
-/*   Updated: 2023/11/28 22:59:16 by nsoares-         ###   ########.fr       */
->>>>>>> 30106bc1968c57ad115e9896d1711d838bba1631
+/*   Updated: 2023/11/29 13:45:26 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +55,14 @@ int	check_file_extension(char *file_name)
 	if (ft_strlen(file) < 5)
 	{
 		printf("Error!\nFile extension not valid...\n");
+		free(file);
 		return (1);
 	}
 	if (check_file_extension_part2(file))
+	{
+		free(file);
 		return (1);
+	}
+	free(file);
 	return (0);
 }
