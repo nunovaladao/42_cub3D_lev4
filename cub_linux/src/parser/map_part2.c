@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:54:18 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/28 16:58:29 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:24:31 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ char	*copy_map(char *map_test, int *j, int max_length)
 	new_map[i] = '\0';
 	return (new_map);
 }
-
 
 int	f_fill_part2(char **map, t_size_map ms, int x, int y)
 {

@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:01:09 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/28 17:31:35 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:23:42 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	check_file_extension_part2(char *file)
 	}
 	return (0);
 }
-
 
 int	check_file_extension(char *file_name)
 {

@@ -6,19 +6,19 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:02:34 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/28 16:11:13 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:24:05 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
- 
- /**
+
+/**
   * @brief Get the factors rgb object
   * e, g and b factors in colors
   * @param i -> index in string
   * @param test 
   * @return int -> returns in test
-  */
+*/
 int	get_factors_rgb(int *i, char *test)
 {
 	int		init;

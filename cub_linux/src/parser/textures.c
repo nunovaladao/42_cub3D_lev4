@@ -6,15 +6,11 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:01:07 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/28 17:47:05 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:23:06 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
-
-///FALTA VERIFICAR QUE A EXTENSAO DAS TEXTURAS E XPM
-
 
 int	check_string(char *test, int *i)
 {
@@ -25,6 +21,31 @@ int	check_string(char *test, int *i)
 	}
 	while ((test[*i] == ' ' || test[*i] == '\t') && test[*i] != '\0')
 		(*i)++;
+	return (0);
+}
+
+int	check_textures_extension(char *new)
+{
+	int	length;
+	int	i;
+
+	length = (int)ft_strlen(new) - 1;
+	if (new[length] != 'm' || new[length - 1] != 'p' \
+	|| new[length - 2] != 'x' || new[length - 3] != '.')
+	{
+		printf("Error!\nThe textures have to be .xpm\n");
+		return (1);
+	}
+	i = 0;
+	while (new[i] != '/' && new[i] != '\0')
+		i++;
+	if (i == length + 1)
+		i = -1;
+	if ((length - 4) == i)
+	{
+		printf("Error!\nThe file .xpm is invalid!\n");
+		return (1);
+	}
 	return (0);
 }
 
@@ -48,6 +69,8 @@ char	*get_string(char *test)
 	&& test[j] != '\n' && test[j] != '\0')
 		j++;
 	new = ft_substr(test, i, j - i);
+	if (check_textures_extension(new))
+		return (NULL);
 	fd = open(new, O_RDONLY);
 	if (fd < 0)
 	{
