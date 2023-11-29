@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/29 15:59:43 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:31:34 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int		check_file(char *file, t_map *map);
 int		check_args(int ac, char **av, t_map *map);
 int		check_file_extension(char *file_name);
 void	directions(t_data *data);
+void	small_free(t_mlx *mlx, t_map *map);
 
 // Draw
 void	my_mlx_pixel_put(t_mlx *m, int x, int y, int color);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:48:39 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/29 15:14:07 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:31:53 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,7 @@ int	main(int ac, char **av)
 	map = (t_map *)malloc(sizeof(t_map));
 	init_all(&mlx, &data, map);
 	if (check_args(ac, av, map) == 1)
-	{
-		if (mlx.data->text)
-			free(mlx.data->text);
-		free_map(map);
-		exit(1);
-	}
+		small_free(&mlx, map);
 	if (start_parser(map))
 	{
 		free(data.text);
