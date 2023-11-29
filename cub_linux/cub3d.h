@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/29 14:24:23 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:55:27 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ typedef struct s_map
 	char	*w_texture;
 	char	*e_texture;
 	t_data	*data;
-	char 	*color_c;
-	char 	*color_f;
+	char	*color_c;
+	char	*color_f;
 	int		c_color;
 	int		f_color;
 }				t_map;
@@ -168,12 +168,12 @@ int		check_string(char *test, int *i);
 int		get_factors_rgb(int *i, char *test);
 void	get_hexa_parts(int *i, char **hexa, int color);
 char	*get_hexa(t_rgb color);
-int 	get_colors(char *test, t_map *map);
+int		get_colors(char *test, t_map *map);
 int		clear_spaces(int *i, char *test, int a);
 
 /*Map_part1*/
 int		start_map(char *test, t_map *map);
-int 	check_characters(char *map_test);
+int		check_characters(char *map_test);
 char	**build_map(char *map_test, int lines, int max_length);
 int		parse_map(char *map_test, t_map *map);
 
@@ -183,10 +183,10 @@ int		number_of_lines(char *map_test);
 char	*copy_map(char *map_test, int *j, int max_length);
 
 /*map_floodfill*/
-int	f_fill(char **map, t_size_map ms, int x, int y);
-int find_char(char **map, int *x, int *y, char find);
-int	floodfill(char **map, t_size_map s_map);
-int	f_fill_part2(char **map, t_size_map ms, int x, int y);
+int		f_fill(char **map, t_size_map ms, int x, int y);
+int		find_char(char **map, int *x, int *y, char find);
+int		floodfill(char **map, t_size_map s_map);
+int		f_fill_part2(char **map, t_size_map ms, int x, int y);
 
 /*Error*/
 void	free_map(t_map *map);
@@ -195,9 +195,8 @@ char	*cleaning_func_part3(char *map_test);
 int		final_check_player(int a);
 
 /*parser_part2*/
-int get_base_10(char *color);
+int		get_base_10(char *color);
 char	*test_spaces(char *test);
 char	*cleaning_func(char *test);
-
 
 #endif
