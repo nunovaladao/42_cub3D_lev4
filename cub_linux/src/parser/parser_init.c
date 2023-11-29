@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:40:19 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/29 11:24:59 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:20:30 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,19 @@ int	parse_gnl(t_map *map)
 
 int	start_parser(t_map *map)
 {
+	char	*test;
+
 	if (parse_gnl(map))
 	{
-		free_map(map);
+		test = get_next_line(map->fd);
+		while (test)
+		{
+			free(test);
+			test = NULL;
+			test = get_next_line(map->fd);
+		}
 		close(map->fd);
+		free_map(map);
 		return (1);
 	}
 	map->c_color = get_base_10(map->color_c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:06:52 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/29 14:55:27 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:59:43 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ int		clear_spaces(int *i, char *test, int a);
 /*Map_part1*/
 int		start_map(char *test, t_map *map);
 int		check_characters(char *map_test);
-char	**build_map(char *map_test, int lines, int max_length);
+char	**build_map(char *map_test, t_size_map	*s_map);
 int		parse_map(char *map_test, t_map *map);
 
 /*Map_part2*/

@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 19:21:42 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/28 17:27:53 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:01:25 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_characters(char *map_test)
 	return (0);
 }
 
-char	**build_map(char *map_test, int lines, int max_length)
+char	**build_map(char *map_test, t_size_map	*s_map)
 {
 	char	**map;
 	int		i;
@@ -61,12 +61,17 @@ char	**build_map(char *map_test, int lines, int max_length)
 	char	*test;
 
 	i = 0;
-	map = malloc(sizeof(char *) * (lines + 1));
+	map = malloc(sizeof(char *) * (s_map->lines + 1));
 	i = 0;
 	j = 0;
-	while (i < lines)
+	while (i < s_map->lines)
 	{
-		test = copy_map(map_test, &j, max_length);
+		test = copy_map(map_test, &j, s_map->max_length);
+		if (!test)
+		{
+			s_map->max_length = -1;
+			break ;
+		}
 		map[i] = ft_strdup(test);
 		free(test);
 		test = NULL;
@@ -84,7 +89,12 @@ int	parse_map(char *map_test, t_map *map)
 		return (1);
 	s_map.max_length = max_length_line(map_test);
 	s_map.lines = number_of_lines(map_test);
-	map->worldmap = build_map(map_test, s_map.lines, s_map.max_length);
+	map->worldmap = build_map(map_test, &s_map);
+	if (s_map.max_length == -1)
+	{
+		printf("Error!\nMap: Empty line!\n");
+		return (1);
+	}
 	if (floodfill(map->worldmap, s_map))
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:01:07 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/29 11:23:06 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:37:37 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ int	check_string(char *test, int *i)
 	return (0);
 }
 
-int	check_textures_extension(char *new)
+int	check_textures_extension(char *new, int fd, int length)
 {
-	int	length;
 	int	i;
 
-	length = (int)ft_strlen(new) - 1;
+	if (fd < 0)
+	{
+		printf("Error!\nTexture: no path found\n");
+		return (1);
+	}
 	if (new[length] != 'm' || new[length - 1] != 'p' \
 	|| new[length - 2] != 'x' || new[length - 3] != '.')
 	{
@@ -69,16 +72,14 @@ char	*get_string(char *test)
 	&& test[j] != '\n' && test[j] != '\0')
 		j++;
 	new = ft_substr(test, i, j - i);
-	if (check_textures_extension(new))
-		return (NULL);
 	fd = open(new, O_RDONLY);
-	if (fd < 0)
+	if (check_textures_extension(new, fd, (int)ft_strlen(new) - 1))
 	{
-		printf("Error!\nTexture: no path found\n");
-		close(fd);
+		free(new);
+		if (fd > -1)
+			close(fd);
 		return (NULL);
 	}
-	close(fd);
 	return (new);
 }
 

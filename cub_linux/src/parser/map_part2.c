@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 20:54:18 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/29 11:24:31 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:56:21 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char	*copy_map(char *map_test, int *j, int max_length)
 	char	*new_map;
 
 	i = 0;
+	if (map_test[*j] == '\n')
+		return (NULL);
 	new_map = malloc(sizeof(char) * (max_length + 1));
 	while (map_test[(*j)] != '\0' && map_test[(*j)] != '\n')
 	{

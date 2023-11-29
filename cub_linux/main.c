@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:48:39 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/29 14:45:07 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:14:07 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	main(int ac, char **av)
 		exit(1);
 	}
 	if (start_parser(map))
+	{
+		free(data.text);
 		return (1);
+	}
 	directions(&data);
 	open_window(&mlx);
 	init_textures(&data);
