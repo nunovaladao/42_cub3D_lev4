@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:16:56 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/28 16:40:26 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/28 22:55:46 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
+/**
+ * @brief Draws a textured wall segment on the screen.
+ *
+ * This function is responsible for drawing a textured wall 
+ * segment on the screen based on the information obtained during 
+ * the raycasting process. It calculates the texture coordinates, 
+ * performs texture mapping, and updates the screen pixels accordingly.
+ *
+ * @param d A pointer to the game data structure.
+ */
 void	draw_texture(t_data *d)
 {
 	d->map->step = 1.0 * TEXTHEIGHT / d->lineheight;
@@ -37,6 +47,17 @@ void	draw_texture(t_data *d)
 	}
 }
 
+/**
+ * @brief Calculates pixel information for drawing a wall segment
+ *  on the screen.
+ *
+ * This function calculates the necessary pixel information for 
+ * drawing a wall segment on the screen based on the results of the 
+ * raycasting process. It computes the height of the wall, the starting 
+ * and ending points for drawing, and texture coordinates.
+ *
+ * @param d A pointer to the game data structure.
+ */
 void	calc_wall_pixel(t_data *d)
 {
 	d->lineheight = (int)(SCREENHEIGHT / d->perpwalldist);
@@ -58,6 +79,16 @@ void	calc_wall_pixel(t_data *d)
 		d->tex_x = TEXWIDTH - d->tex_x - 1;
 }
 
+/**
+ * @brief Determines the side of the wall hit by the ray.
+ *
+ * This function calculates the step direction and side 
+ * distances for both the x and y directions based on the 
+ * direction of the ray. It helps in determining which side 
+ * of the wall is being approached by the ray.
+ *
+ * @param d A pointer to the game data structure.
+ */
 void	check_side(t_data *d)
 {
 	if (d->raydir_x < 0)
@@ -82,6 +113,17 @@ void	check_side(t_data *d)
 	}
 }
 
+/**
+ * @brief Performs calculations for the raycasting process.
+ *
+ * This function calculates various parameters needed for 
+ * the raycasting process, including the position of the camera,
+ * the direction of the rays, and the map coordinates. It then 
+ * calls the check_side function to determine the side of 
+ * the wall hit by the ray.
+ *
+ * @param d A pointer to the game data structure.
+ */
 void	calculations(t_data *d)
 {
 	d->camera_x = 2 * (double)d->x / (double)SCREENWIDTH - 1;
@@ -94,6 +136,18 @@ void	calculations(t_data *d)
 	check_side(d);
 }
 
+/**
+ * @brief Performs the DDA (Digital Differential Analyzer) 
+ * algorithm to calculate wall hits.
+ *
+ * This function uses the DDA algorithm to determine 
+ * the position where the ray hits a wall in the game world. 
+ * It iterates through the grid, updating the side distances
+ * and map coordinates until a wall is hit. The side variable 
+ * indicates whether the wall is in the x or y direction.
+ *
+ * @param d A pointer to the game data structure.
+ */
 void	perform_dda(t_data *d)
 {
 	d->hit = '0';

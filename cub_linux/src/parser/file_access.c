@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   file_access.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:01:09 by nsoares-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/29 11:23:42 by idias-al         ###   ########.fr       */
+=======
+/*   Updated: 2023/11/28 22:59:16 by nsoares-         ###   ########.fr       */
+>>>>>>> 30106bc1968c57ad115e9896d1711d838bba1631
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +61,6 @@ int	check_file_extension(char *file_name)
 		printf("Error!\nFile extension not valid...\n");
 		return (1);
 	}
-	i = 0;
 	if (check_file_extension_part2(file))
 		return (1);
 	return (0);
