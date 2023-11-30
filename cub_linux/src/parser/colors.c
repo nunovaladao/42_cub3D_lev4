@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:02:34 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/29 11:24:05 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:48:43 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,14 @@ int	get_colors(char *test, t_map *map)
 	str = get_hexa(color);
 	if (!str)
 		return (1);
-	if (ft_strchr(test, 'F'))
+	if (ft_strchr(test, 'F') && !map->color_f)
 		map->color_f = str;
-	else
+	else if (ft_strchr(test, 'C') && !map->color_c)
 		map->color_c = str;
+	else
+	{
+		printf("Error!\nDouble colors\n");
+		return (1);
+	}
 	return (0);
 }

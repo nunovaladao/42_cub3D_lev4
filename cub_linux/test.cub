@@ -3,12 +3,12 @@ SO     textures/S1.xpm
 
 
 F	26,56,130  
-
    EA textures/E1.xpm   
 
 WE textures/W1.xpm
-
+F 120,56,130
    C 120,56,130
+      
 
   
 111111111111111111111111

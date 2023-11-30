@@ -6,7 +6,7 @@
 /*   By: idias-al <idias-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:01:07 by inesalves         #+#    #+#             */
-/*   Updated: 2023/11/29 15:37:37 by idias-al         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:47:26 by idias-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,19 @@ int	get_textures(char *test, t_map *map)
 	texture = get_string(&test[2]);
 	if (!texture)
 		return (1);
-	if (!ft_strncmp(test, "NO", 2))
+	if (!ft_strncmp(test, "NO", 2) && !map->n_texture)
 		map->n_texture = texture;
-	else if (!ft_strncmp(test, "SO", 2))
+	else if (!ft_strncmp(test, "SO", 2) && !map->s_texture)
 		map->s_texture = texture;
-	else if (!ft_strncmp(test, "WE", 2))
+	else if (!ft_strncmp(test, "WE", 2) && !map->w_texture)
 		map->w_texture = texture;
-	else if (!ft_strncmp(test, "EA", 2))
+	else if (!ft_strncmp(test, "EA", 2)  && !map->e_texture)
 		map->e_texture = texture;
+	else
+	{
+		printf("Error!\nDouble textures\n");
+		return (1);
+	}
 	return (0);
 }
 
