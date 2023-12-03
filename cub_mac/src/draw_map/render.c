@@ -6,7 +6,7 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:45:29 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/07 17:20:15 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/28 22:45:06 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,29 @@
 
 /**
  * @brief Renders the next frame of the game.
- * 
- * @param param The t_data struct.
- * @return int 0 if successful.
+ *
+ * This function is responsible for rendering 
+ * the next frame of the game by performing
+ * calculations, raycasting, and drawing textures 
+ * on the screen.
+ *
+ * @param param A pointer to the data structure 
+ * containing information about the game.
+ * @return int Returns 0 upon successful execution.
  */
-int render_next_frame(void *param)
+int	render_next_frame(void *param)
 {
-	t_data *d = param;
+	t_data	*d;
 
-    background(d->mlx); // Draw the background color to the screen.
+	d = param;
+	background(d->mlx);
 	d->x = -1;
-	while (++d->x < screenWidth) // Loop through each vertical stripe of the screen.
-    {
-		calculations(d); // Calculate the ray position and direction.
-		perform_dda(d); // Perform DDA algorithm.
-		calc_wall_pixel(d); // Calculate the height of the wall.
-		draw_texture(d); // Draw the texture to the screen.
+	while (++d->x < SCREENWIDTH)
+	{
+		calculations(d);
+		perform_dda(d);
+		calc_wall_pixel(d);
+		draw_texture(d);
 	}
-    return (0);
+	return (0);
 }

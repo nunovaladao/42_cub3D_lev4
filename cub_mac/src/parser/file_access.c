@@ -6,37 +6,63 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:01:09 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/10/23 23:46:25 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/29 13:45:26 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-int		check_file(char *file)
+int	check_file(char *file, t_map *map)
 {
-    int		fd;
-
-    fd = open(file, O_RDONLY);
-    if (fd == -1)
-    {
-        printf("Error!\nFile not found...\n");
-        return (1);
-    }
-    close(fd);
-    return (0);
+	map->fd = open(file, O_RDONLY);
+	if (map->fd == -1)
+	{
+		printf("Error!\nFile not found...\n");
+		return (1);
+	}
+	return (0);
 }
 
-int check_file_extension(char *file_name)
+int	check_file_extension_part2(char *file)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (file_name[i])
-        i++;
-    if (file_name[i - 1] != 'b' || file_name[i - 2] != 'u' || file_name[i - 3] != 'c' || file_name[i - 4] != '.')
-    {
-        printf("Error!\nFile extension not valid...\n");
-        return (1);
-    }
-    return (0);
+	i = 0;
+	while (file[i])
+		i++;
+	if (file[i - 1] != 'b' || file[i - 2] != 'u' || \
+	file[i - 3] != 'c' || file[i - 4] != '.')
+	{
+		printf("Error!\nFile extension not valid...\n");
+		return (1);
+	}
+	return (0);
+}
+
+int	check_file_extension(char *file_name)
+{
+	char	*file;
+	int		i;
+	int		start;
+
+	i = -1;
+	while (file_name[++i] != '\0')
+		if (file_name[i] == '/')
+			start = i;
+	if (i == (int)ft_strlen(file_name))
+		start = -1;
+	file = ft_substr(file_name, start + 1, ft_strlen(file_name));
+	if (ft_strlen(file) < 5)
+	{
+		printf("Error!\nFile extension not valid...\n");
+		free(file);
+		return (1);
+	}
+	if (check_file_extension_part2(file))
+	{
+		free(file);
+		return (1);
+	}
+	free(file);
+	return (0);
 }

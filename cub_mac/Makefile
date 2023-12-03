@@ -6,7 +6,7 @@
 #    By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/27 17:52:53 by nsoares-          #+#    #+#              #
-#    Updated: 2023/11/07 12:02:29 by nsoares-         ###   ########.fr        #
+#    Updated: 2023/12/03 00:48:08 by nsoares-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,12 @@ MLX = -L ./minilibx_opengl -lmlx -Imlx -framework OpenGL -framework AppKit
 # _________SOURCES____________
 
 SOURCE_FILES = gnl/get_next_line.c gnl/get_next_line_utils.c \
-				main.c src/moves/moves_handle.c src/cub_utils.c src/inits/window.c src/inits/init.c \
+				main.c src/moves/moves_handle.c src/utils/cub_utils.c src/inits/window.c src/inits/init.c \
 				src/parser/file_access.c src/parser/check_args.c src/draw_map/draw.c \
-				src/map_construct/map.c src/draw_map/render.c src/draw_map/render_utils.c \
-				src/map_construct/map_utils.c 
+				src/draw_map/render.c src/draw_map/render_utils.c \
+				src/parser/parser_init.c src/parser/textures.c src/parser/colors.c src/parser/map_part1.c \
+				src/parser/map_floodfill.c src/parser/map_part2.c src/parser/free_error.c src/parser/parser_part2.c \
+				src/parser/set_directions.c
 
 OBJS_FILES = $(SOURCE_FILES:.c=.o)
 

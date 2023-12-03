@@ -6,139 +6,170 @@
 /*   By: nsoares- <nsoares-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:16:56 by nsoares-          #+#    #+#             */
-/*   Updated: 2023/11/08 17:43:07 by nsoares-         ###   ########.fr       */
+/*   Updated: 2023/11/28 22:55:46 by nsoares-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-void draw_texture(t_data *d) // Draw the texture to the screen.
+/**
+ * @brief Draws a textured wall segment on the screen.
+ *
+ * This function is responsible for drawing a textured wall 
+ * segment on the screen based on the information obtained during 
+ * the raycasting process. It calculates the texture coordinates, 
+ * performs texture mapping, and updates the screen pixels accordingly.
+ *
+ * @param d A pointer to the game data structure.
+ */
+void	draw_texture(t_data *d)
 {
-	// How much to increase the texture coordinate per screen pixel
-	d->map->step = 1.0 * texHeight / d->lineHeight;
-	// Starting texture coordinate
-	d->map->texPos = (d->drawStart - (double)screenHeight / 2 \
-	+ (double)d->lineHeight / 2) * d->map->step;
-
-	d->y = d->drawStart - 1;
-	while (++d->y < d->drawEnd)
+	d->map->step = 1.0 * TEXTHEIGHT / d->lineheight;
+	d->map->tex_pos = (d->drawstart - (double)SCREENHEIGHT / 2 \
+	+ (double)d->lineheight / 2) * d->map->step;
+	d->y = d->drawstart - 1;
+	while (++d->y < d->drawend)
 	{
-		d->texY = (int)d->map->texPos & (texHeight - 1);
-		d->map->texPos += d->map->step;
-
-		if (d->side == '0' && d->rayDirX > 0)
+		d->tex_y = (int)d->map->tex_pos & (TEXTHEIGHT - 1);
+		d->map->tex_pos += d->map->step;
+		if (d->side == '0' && d->raydir_x > 0)
 			my_mlx_pixel_put(d->mlx, d->x, d->y, (unsigned int) \
-			my_mlx_pixel_get(&d->text[SOUTH], d->texX, d->texY));
-		else if (d->side == '0' && d->rayDirX < 0)
+			my_mlx_pixel_get(&d->text[SOUTH], d->tex_x, d->tex_y));
+		else if (d->side == '0' && d->raydir_x < 0)
 			my_mlx_pixel_put(d->mlx, d->x, d->y, (unsigned int) \
-			my_mlx_pixel_get(&d->text[NORTH], d->texX, d->texY));
-		else if (d->side == '1' && d->rayDirY > 0)
+			my_mlx_pixel_get(&d->text[NORTH], d->tex_x, d->tex_y));
+		else if (d->side == '1' && d->raydir_y > 0)
 			my_mlx_pixel_put(d->mlx, d->x, d->y, (unsigned int) \
-			my_mlx_pixel_get(&d->text[EAST], d->texX, d->texY));
-		else if (d->side == '1' && d->rayDirY < 0)
+			my_mlx_pixel_get(&d->text[EAST], d->tex_x, d->tex_y));
+		else if (d->side == '1' && d->raydir_y < 0)
 			my_mlx_pixel_put(d->mlx, d->x, d->y, (unsigned int) \
-			my_mlx_pixel_get(&d->text[WEST], d->texX, d->texY));
+			my_mlx_pixel_get(&d->text[WEST], d->tex_x, d->tex_y));
 	}
 }
 
-void calc_wall_pixel(t_data *d) // Calculate the height of the wall.
+/**
+ * @brief Calculates pixel information for drawing a wall segment
+ *  on the screen.
+ *
+ * This function calculates the necessary pixel information for 
+ * drawing a wall segment on the screen based on the results of the 
+ * raycasting process. It computes the height of the wall, the starting 
+ * and ending points for drawing, and texture coordinates.
+ *
+ * @param d A pointer to the game data structure.
+ */
+void	calc_wall_pixel(t_data *d)
 {
-	// The value of screenHeight will make the walls look like cubes
-    //Calculate height of line to draw on screen
-	d->lineHeight = (int)(screenHeight / d->perpWallDist);
-
-	//calculate lowest and highest pixel to fill in current stripe
-	d->drawStart = -d->lineHeight / 2 + screenHeight / 2;
-
-	if (d->drawStart < 0)
-		d->drawStart = 0; // if these points lie outside the screen
-
-	d->drawEnd = d->lineHeight / 2 + screenHeight / 2;
-
-	if (d->drawEnd >= screenHeight)
-		d->drawEnd = screenHeight - 1; // if these points lie outside the screen
-
-	// calculate value of wallX
-	// where exactly the wall was hit
-	// This is required to know which x-coordinate of the texture we have to use.
+	d->lineheight = (int)(SCREENHEIGHT / d->perpwalldist);
+	d->drawstart = -d->lineheight / 2 + SCREENHEIGHT / 2;
+	if (d->drawstart < 0)
+		d->drawstart = 0;
+	d->drawend = d->lineheight / 2 + SCREENHEIGHT / 2;
+	if (d->drawend >= SCREENHEIGHT)
+		d->drawend = SCREENHEIGHT - 1;
 	if (d->side == '0')
-		d->map->wallX = d->posY + d->perpWallDist * d->rayDirY;
+		d->map->wall_x = d->pos_y + d->perpwalldist * d->raydir_y;
 	else
-		d->map->wallX = d->posX + d->perpWallDist * d->rayDirX;
-	d->map->wallX -= floor((d->map->wallX));
-
-	//x coordinate on the texture
-    d->texX = (int)(d->map->wallX * (double)texWidth); 
-	if (d->side == '0' && d->rayDirX > 0) 
-		d->texX = texWidth - d->texX - 1;
-	if (d->side == '1' && d->rayDirY < 0) 
-		d->texX = texWidth - d->texX - 1;
+		d->map->wall_x = d->pos_x + d->perpwalldist * d->raydir_x;
+	d->map->wall_x -= floor((d->map->wall_x));
+	d->tex_x = (int)(d->map->wall_x * (double)TEXWIDTH);
+	if (d->side == '0' && d->raydir_x > 0)
+		d->tex_x = TEXWIDTH - d->tex_x - 1;
+	if (d->side == '1' && d->raydir_y < 0)
+		d->tex_x = TEXWIDTH - d->tex_x - 1;
 }
 
-void check_side(t_data *d)
+/**
+ * @brief Determines the side of the wall hit by the ray.
+ *
+ * This function calculates the step direction and side 
+ * distances for both the x and y directions based on the 
+ * direction of the ray. It helps in determining which side 
+ * of the wall is being approached by the ray.
+ *
+ * @param d A pointer to the game data structure.
+ */
+void	check_side(t_data *d)
 {
-    if (d->rayDirX < 0) 
-    {
-        d->stepX = -1; 
-        d->sideDistX = (d->posX - d->mapX) * d->deltaDistX; // Distance to the next x or y-side
-    }
-    else
-    {
-        d->stepX = 1;
-        d->sideDistX = (d->mapX + 1.0 - d->posX) * d->deltaDistX; // Distance to the next x or y-side
-    }
-    if (d->rayDirY < 0)
-    {
-        d->stepY = -1;
-        d->sideDistY = (d->posY - d->mapY) * d->deltaDistY; // Distance to the next x or y-side
-    }
-    else
-    {
-        d->stepY = 1;
-        d->sideDistY = (d->mapY + 1.0 - d->posY) * d->deltaDistY; // Distance to the next x or y-side
-    }
-}
-
-void calculations(t_data *d) // Calculate the ray position and direction.
-{
-    d->cameraX = 2 * (double)d->x / (double)screenWidth - 1; //d->-coordinate in camera space
-    d->rayDirX = d->dirX + d->planeX * d->cameraX; // Ray direction
-    d->rayDirY = d->dirY + d->planeY * d->cameraX; // Ray direction
-    d->mapX = (int)d->posX; // Current square on the map
-    d->mapY = (int)d->posY; // Current square on the map
-    d->deltaDistX = fabs(1.0 / d->rayDirX); // Length of ray from one x or y-side to next x or y-side
-    d->deltaDistY = fabs(1.0 / d->rayDirY); // Length of ray from one x or y-side to next x or y-side
-
-    check_side(d); // Check side of the wall
-}
-
-void perform_dda(t_data *d) // Perform DDA algorithm.
-{
-    d->hit = '0'; //was there a wall hit?
-	// It's a loop that increments the ray with 1 square every time, until a wall is hit.
-	// It always jumps 1 square at once, either in x-direction or in y-direction
-    while (d->hit == '0') 
+	if (d->raydir_x < 0)
 	{
-			//jump to next map square, either in x-direction, or in y-direction
-		if (d->sideDistX < d->sideDistY)
+		d->step_x = -1;
+		d->sidedist_x = (d->pos_x - d->map_x) * d->deltadist_x;
+	}
+	else
+	{
+		d->step_x = 1;
+		d->sidedist_x = (d->map_x + 1.0 - d->pos_x) * d->deltadist_x;
+	}
+	if (d->raydir_y < 0)
+	{
+		d->step_y = -1;
+		d->sidedist_y = (d->pos_y - d->map_y) * d->deltadist_y;
+	}
+	else
+	{
+		d->step_y = 1;
+		d->sidedist_y = (d->map_y + 1.0 - d->pos_y) * d->deltadist_y;
+	}
+}
+
+/**
+ * @brief Performs calculations for the raycasting process.
+ *
+ * This function calculates various parameters needed for 
+ * the raycasting process, including the position of the camera,
+ * the direction of the rays, and the map coordinates. It then 
+ * calls the check_side function to determine the side of 
+ * the wall hit by the ray.
+ *
+ * @param d A pointer to the game data structure.
+ */
+void	calculations(t_data *d)
+{
+	d->camera_x = 2 * (double)d->x / (double)SCREENWIDTH - 1;
+	d->raydir_x = d->dir_x + d->plane_x * d->camera_x;
+	d->raydir_y = d->dir_y + d->plane_y * d->camera_x;
+	d->map_x = (int)d->pos_x;
+	d->map_y = (int)d->pos_y;
+	d->deltadist_x = fabs(1.0 / d->raydir_x);
+	d->deltadist_y = fabs(1.0 / d->raydir_y);
+	check_side(d);
+}
+
+/**
+ * @brief Performs the DDA (Digital Differential Analyzer) 
+ * algorithm to calculate wall hits.
+ *
+ * This function uses the DDA algorithm to determine 
+ * the position where the ray hits a wall in the game world. 
+ * It iterates through the grid, updating the side distances
+ * and map coordinates until a wall is hit. The side variable 
+ * indicates whether the wall is in the x or y direction.
+ *
+ * @param d A pointer to the game data structure.
+ */
+void	perform_dda(t_data *d)
+{
+	d->hit = '0';
+	while (d->hit == '0')
+	{
+		if (d->sidedist_x < d->sidedist_y)
 		{
-			d->sideDistX += d->deltaDistX;
-			d->mapX += d->stepX;
+			d->sidedist_x += d->deltadist_x;
+			d->map_x += d->step_x;
 			d->side = '0';
 		}
 		else
 		{
-			d->sideDistY += d->deltaDistY;
-			d->mapY += d->stepY;
-            d->side = '1';
+			d->sidedist_y += d->deltadist_y;
+			d->map_y += d->step_y;
+			d->side = '1';
 		}
-		//Check if ray has hit a wall, when the ray has hit a wall, the loop ends
-		if (d->map->worldMap[d->mapX][d->mapY] > '0')
+		if (d->map->worldmap[d->map_x][d->map_y] > '0')
 			d->hit = '1';
 	}
-	// Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
-    if (d->side == '0') 
-		d->perpWallDist = (d->sideDistX - d->deltaDistX);
-    else
-		d->perpWallDist = (d->sideDistY - d->deltaDistY);
+	if (d->side == '0')
+		d->perpwalldist = (d->sidedist_x - d->deltadist_x);
+	else
+		d->perpwalldist = (d->sidedist_y - d->deltadist_y);
 }
