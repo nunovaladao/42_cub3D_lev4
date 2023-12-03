@@ -38,7 +38,7 @@ make
 
 4. Run Cub3D:
 ```bash
-./cub3D maps/<name_map>
+./cub3D <.cub file>
 ```
 
 ## Usage
