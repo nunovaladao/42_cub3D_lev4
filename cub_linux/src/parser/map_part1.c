@@ -103,9 +103,7 @@ int	parse_map(char *map_test, t_map *map)
 int	start_map(char *test, t_map *map)
 {
 	char	*map_test;
-	int		i;
 
-	i = 0;
 	map_test = cleaning_func_part2(test, map);
 	map_test = cleaning_func_part3(map_test);
 	if (parse_map(map_test, map))
